@@ -28,7 +28,7 @@ public class WebviewFragment extends Fragment {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setBuiltInZoomControls(true);
-        
+
         webView.loadUrl(bundle.getString("URL"));
 
         return rootView;
