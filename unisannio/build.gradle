@@ -1,4 +1,18 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:+'
+    }
+}
+
 apply plugin: 'android'
+
+repositories {
+    maven { url "http://dl.bintray.com/populov/maven" }
+    mavenCentral()
+}
 
 android {
     compileSdkVersion 19
@@ -22,10 +36,12 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
+
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.android.support:appcompat-v7:19.1.0'
     compile 'org.jsoup:jsoup:1.7.3'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.netflix.rxjava:rxjava-android:0.18.3'
     compile 'org.projectlombok:lombok:1.12.4'
+    compile 'com.viewpagerindicator:library:2.4.1@aar'
 }
