@@ -37,8 +37,10 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
 
+
     compile 'com.android.support:support-v4:19.1.0'
     compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.google.android.gms:play-services:+'
     compile 'org.jsoup:jsoup:1.7.3'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.netflix.rxjava:rxjava-android:0.18.3'
