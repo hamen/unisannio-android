@@ -1,4 +1,6 @@
-package org.dronix.android.unisannio;
+package org.dronix.android.unisannio.fragments;
+
+import org.dronix.android.unisannio.R;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;

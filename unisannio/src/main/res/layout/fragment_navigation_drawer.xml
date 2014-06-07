@@ -6,4 +6,4 @@
     android:divider="@color/navigation_drawer_divider"
     android:dividerHeight="1dp"
     android:background="@color/navigation_drawer_bg"
-    tools:context="org.dronix.android.unisannio.NavigationDrawerFragment" />
+    tools:context="org.dronix.android.unisannio.fragments.NavigationDrawerFragment" />
