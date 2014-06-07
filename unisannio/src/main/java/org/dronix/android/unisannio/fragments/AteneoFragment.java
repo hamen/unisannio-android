@@ -2,9 +2,11 @@ package org.dronix.android.unisannio.fragments;
 
 import com.viewpagerindicator.TitlePageIndicator;
 
+import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.AteneoFragmentAdapter;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -19,8 +21,7 @@ public class AteneoFragment extends Fragment {
     private AteneoFragmentAdapter mAdapter;
 
     public static AteneoFragment newInstance(String content) {
-        AteneoFragment fragment = new AteneoFragment();
-        return fragment;
+        return new AteneoFragment();
     }
 
     @Override
@@ -38,5 +39,11 @@ public class AteneoFragment extends Fragment {
         titleIndicator.setCurrentItem(1);
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(1);
     }
 }

@@ -4,11 +4,11 @@
     <string name="app_name">Unisannio</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section0">Ateneo</string>
-    <string name="title_section1">Ingegneria</string>
-    <string name="title_section2">Giurisprudenza</string>
-    <string name="title_section3">S.E.A.</string>
-    <string name="title_section4">Scienze MM.FF.NN.</string>
+    <string name="title_section1">Ateneo</string>
+    <string name="title_section2">Ingegneria</string>
+    <string name="title_section3">Giurisprudenza</string>
+    <string name="title_section4">S.E.A.</string>
+    <string name="title_section5">Scienze MM.FF.NN.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_example">Example action</string>
