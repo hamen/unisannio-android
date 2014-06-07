@@ -30,7 +30,7 @@ public class AteneoFragment extends Fragment {
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
-        mAdapter = new AteneoFragmentAdapter(getActivity().getSupportFragmentManager());
+        mAdapter = new AteneoFragmentAdapter(getChildFragmentManager());
         mPager.setAdapter(mAdapter);
 
         //Bind the title indicator to the adapter
