@@ -1,6 +1,11 @@
 package org.dronix.android.unisannio.adapters;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+
+import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
+import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.WebviewFragment;
 
 import android.os.Bundle;
@@ -14,10 +19,15 @@ public class AteneoFragmentAdapter extends FragmentPagerAdapter {
             "Sito WEB", "Avvisi", "Mappa"
     };
 
+    private final FragmentManager mFragmentManager;
+
     private int mCount = CONTENT.length;
+
+    private GoogleMap mMap;
 
     public AteneoFragmentAdapter(FragmentManager fm) {
         super(fm);
+        mFragmentManager = fm;
     }
 
     @Override
@@ -35,7 +45,7 @@ public class AteneoFragmentAdapter extends FragmentPagerAdapter {
                 retval = new AteneoAvvisiFragment();
                 break;
             case 2:
-                retval = new Fragment();
+                retval = new MapFragment();
                 break;
         }
         return retval;
