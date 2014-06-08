@@ -3,6 +3,7 @@ package org.dronix.android.unisannio;
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.AteneoFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
+import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 
 import android.content.Context;
 
@@ -48,5 +49,11 @@ public class ActivityModule {
     @Singleton
     MainActivity provideActivity() {
         return activity;
+    }
+
+    @Provides
+    @Singleton
+    NavigationDrawerFragment provideNavigationDrawer() {
+        return activity.getNavigationDrawerFragment();
     }
 }

@@ -20,13 +20,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import dagger.ObjectGraph;
+import lombok.Getter;
+import lombok.experimental.Accessors;
 
-
+@Accessors(prefix = "m")
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+    @Getter
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
     /**
