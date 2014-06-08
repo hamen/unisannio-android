@@ -3,50 +3,124 @@ package org.dronix.android.unisannio.fragments;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.UnisannioApplication;
+import org.dronix.android.unisannio.UniApp;
+import org.dronix.android.unisannio.models.UniPoint;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
+import java.util.List;
+
+import javax.inject.Inject;
 
 public class MapFragment extends Fragment {
 
-    static final LatLng HAMBURG = new LatLng(53.558, 9.927);
+    private static View view;
 
-    static final LatLng KIEL = new LatLng(53.551, 9.993);
+    private static GoogleMap mMap;
 
-    private GoogleMap map;
+    private static Double latitude, longitude;
 
+
+    /**
+     * ** Sets up the map if it is possible to do so ****
+     */
+    public static void setUpMapIfNeeded() {
+        // Do a null check to confirm that we have not already instantiated the map.
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) UniApp.getActivity().getSupportFragmentManager().findFragmentById(R.id.location_map)).getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+                setUpMap();
+            }
+        }
+    }
+
+    /**
+     * This is where we can add markers or lines, add listeners or move the camera. <p> This should only be called once and when we are sure that
+     * {@link #mMap} is not null.
+     */
+    private static void setUpMap() {
+        // For showing a move to my loction button
+        mMap.setMyLocationEnabled(true);
+        // For dropping a marker at a point on the Map
+        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)).title("My Home").snippet("Home Address"));
+        // For zooming automatically to the Dropped PIN Location
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 12.0f));
+    }
+
+    public static Fragment newInstance(List<UniPoint> markers) {
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("MARKERS", (java.util.ArrayList<? extends android.os.Parcelable>) markers);
+
+        MapFragment fragment = new MapFragment();
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((MainActivity) getActivity()).inject(this);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if (container == null) {
+            return null;
+        }
+        view = (RelativeLayout) inflater.inflate(R.layout.fragment_maps, container, false);
+        // Passing harcoded values for latitude & longitude. Please change as per your need. This is just used to drop a Marker on the Map
+        latitude = 26.78;
+        longitude = 72.56;
 
-        View v = inflater.inflate(R.layout.fragment_maps, null, false);
+        setUpMapIfNeeded(); // For setting up the MapFragment
 
-        map = ((SupportMapFragment) UnisannioApplication.getActivity().getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        return view;
+    }
 
-        Marker hamburg = map.addMarker(new MarkerOptions().position(HAMBURG).title("Hamburg"));
-        Marker kiel = map.addMarker(new MarkerOptions()
-                .position(KIEL)
-                .title("Kiel")
-                .snippet("Kiel is cool")
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_launcher)));
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        // TODO Auto-generated method stub
+        if (mMap != null) {
+            setUpMap();
+        }
 
-        // Move the camera instantly to hamburg with a zoom of 15.
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
+        if (mMap == null) {
+            // Try to obtain the map from the SupportMapFragment.
+            mMap = ((SupportMapFragment) UniApp.getActivity().getSupportFragmentManager()
+                    .findFragmentById(R.id.location_map)).getMap();
+            // Check if we were successful in obtaining the map.
+            if (mMap != null) {
+                setUpMap();
+            }
+        }
+    }
 
-        // Zoom in, animating the camera.
-        map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
-
-        //...
-
-        return v;
+    /**
+     * * The mapfragment's id must be removed from the FragmentManager *** or else if the same it is passed on the next time then *** app will crash
+     * ***
+     */
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mMap != null) {
+            UniApp.getActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .remove(UniApp.getActivity().getSupportFragmentManager().findFragmentById(R.id.location_map))
+                    .commit();
+            mMap = null;
+        }
     }
 }

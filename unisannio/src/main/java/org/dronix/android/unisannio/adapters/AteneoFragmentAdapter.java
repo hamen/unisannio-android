@@ -1,12 +1,11 @@
 package org.dronix.android.unisannio.adapters;
 
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 
-import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.WebviewFragment;
+import org.dronix.android.unisannio.settings.UnisannioGeoData;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -45,7 +44,7 @@ public class AteneoFragmentAdapter extends FragmentPagerAdapter {
                 retval = new AteneoAvvisiFragment();
                 break;
             case 2:
-                retval = new MapFragment();
+                retval = MapFragment.newInstance(UnisannioGeoData.INGEGNERIA());
                 break;
         }
         return retval;
