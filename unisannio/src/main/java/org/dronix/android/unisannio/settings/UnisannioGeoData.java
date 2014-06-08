@@ -50,8 +50,8 @@ public class UnisannioGeoData {
         points.add(new UniPoint(faculty, "Segreteria Studenti", "Via G. De Nicastro, Complesso Sant'Agostino", lat, lng));
 
         // Rettorato
-        lat = 41.13;
-        lng = 14.77;
+        lat = 41.1302193870069;
+        lng = 14.779537618160248;
         points.add(new UniPoint(faculty, "Rettorato", "Piazza Guerrazzi", lat, lng));
 
         return points;

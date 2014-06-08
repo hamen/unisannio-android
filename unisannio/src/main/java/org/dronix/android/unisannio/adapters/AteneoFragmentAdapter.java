@@ -44,7 +44,7 @@ public class AteneoFragmentAdapter extends FragmentPagerAdapter {
                 retval = new AteneoAvvisiFragment();
                 break;
             case 2:
-                retval = MapFragment.newInstance(UnisannioGeoData.INGEGNERIA());
+                retval = MapFragment.newInstance(UnisannioGeoData.ATENEO());
                 break;
         }
         return retval;

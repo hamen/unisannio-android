@@ -30,7 +30,7 @@ public class UniPoint implements Parcelable {
         mAddress = address;
         mLat = lat;
         mLng = lng;
-        mGeopoint = new LatLng((int) (lat * 1E6), (int) (lng * 1E6));
+        mGeopoint = new LatLng(lat, lng);
     }
 
     @Override
