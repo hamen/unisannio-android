@@ -16,9 +16,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import java.util.Arrays;
+import java.util.List;
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+import dagger.ObjectGraph;
+
+
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -30,17 +34,44 @@ public class MainActivity extends ActionBarActivity
      */
     private CharSequence mTitle;
 
+    private ObjectGraph activityGraph;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        UnisannioApplication.setActivity(this);
+
+        UniApp.setActivity(this);
+
+        // Create the activity graph by .plus-ing our modules onto the application graph.
+        UniApp application = (UniApp) getApplication();
+        activityGraph = application.getApplicationGraph().plus(getModules().toArray());
+
+        // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
+        activityGraph.inject(this);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+    }
+
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new ActivityModule(this));
+    }
+
+    /**
+     * Inject the supplied {@code object} using the activity-specific graph.
+     */
+    public void inject(Object object) {
+        activityGraph.inject(object);
+    }
+
+    @Override
+    protected void onDestroy() {
+        activityGraph = null;
+        super.onDestroy();
     }
 
     @Override
