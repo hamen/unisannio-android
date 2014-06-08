@@ -1,11 +1,12 @@
 package org.dronix.android.unisannio;
 
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
-import org.dronix.android.unisannio.fragments.AteneoFragment;
+import org.dronix.android.unisannio.fragments.LandingFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 
 import android.content.Context;
+import android.support.v7.app.ActionBar;
 
 import dagger.Module;
 import dagger.Provides;
@@ -19,9 +20,10 @@ import javax.inject.Singleton;
 @Module(
         injects = {
                 MainActivity.class,
-                AteneoFragment.class,
+                LandingFragment.class,
                 AteneoAvvisiFragment.class,
-                MapFragment.class
+                MapFragment.class,
+                NavigationDrawerFragment.class
         },
         addsTo = AndroidModule.class,
         library = true
@@ -55,5 +57,11 @@ public class ActivityModule {
     @Singleton
     NavigationDrawerFragment provideNavigationDrawer() {
         return activity.getNavigationDrawerFragment();
+    }
+
+    @Provides
+    @Singleton
+    ActionBar provideActionBar() {
+        return activity.getSupportActionBar();
     }
 }
