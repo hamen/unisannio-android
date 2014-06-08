@@ -24,6 +24,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer. See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
@@ -250,7 +252,15 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
+        int id = item.getItemId();
+        if (id == R.id.action_about) {
+            SimpleDialogFragment
+                    .createBuilder(getActivity(), getActivity().getSupportFragmentManager())
+                    .setTitle("About")
+                    .setMessage("Sviluppato da Ivan Morgillo")
+                    .show();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

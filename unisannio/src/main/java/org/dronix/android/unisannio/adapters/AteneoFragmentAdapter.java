@@ -15,7 +15,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class AteneoFragmentAdapter extends FragmentPagerAdapter {
 
     protected static final String[] CONTENT = new String[]{
-            "Sito WEB", "Avvisi", "Mappa"
+            "Avvisi", "Mappa"
     };
 
     private final FragmentManager mFragmentManager;
@@ -34,16 +34,9 @@ public class AteneoFragmentAdapter extends FragmentPagerAdapter {
         Fragment retval = null;
         switch (position) {
             case 0:
-                Bundle bundle = new Bundle();
-                bundle.putString("URL", "http://www.unisannio.it");
-
-                retval = new WebviewFragment();
-                retval.setArguments(bundle);
-                break;
-            case 1:
                 retval = new AteneoAvvisiFragment();
                 break;
-            case 2:
+            case 1:
                 retval = MapFragment.newInstance(UnisannioGeoData.ATENEO());
                 break;
         }
