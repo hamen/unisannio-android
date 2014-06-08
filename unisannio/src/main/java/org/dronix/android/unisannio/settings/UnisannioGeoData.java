@@ -5,10 +5,9 @@ import org.dronix.android.unisannio.models.UniPoint;
 import java.util.ArrayList;
 import java.util.List;
 
-public enum UnisannioGeoData {
-    INSTANCE;
+public class UnisannioGeoData {
 
-    public List<UniPoint> getIngegneria() {
+    public static List<UniPoint> INGEGNERIA() {
         List<UniPoint> points = new ArrayList<UniPoint>();
 
         final String faculty = "Ingegneria";
@@ -40,7 +39,7 @@ public enum UnisannioGeoData {
         return points;
     }
 
-    public List<UniPoint> getAteneo() {
+    public static List<UniPoint> ATENEO() {
         List<UniPoint> points = new ArrayList<UniPoint>();
 
         final String faculty = "Ateneo";
@@ -51,14 +50,14 @@ public enum UnisannioGeoData {
         points.add(new UniPoint(faculty, "Segreteria Studenti", "Via G. De Nicastro, Complesso Sant'Agostino", lat, lng));
 
         // Rettorato
-        lat = 41.1302193870069;
-        lng = 14.779537618160248;
+        lat = 41.13;
+        lng = 14.77;
         points.add(new UniPoint(faculty, "Rettorato", "Piazza Guerrazzi", lat, lng));
 
         return points;
     }
 
-    public List<UniPoint> getScienze() {
+    public static List<UniPoint> SCIENZE() {
         List<UniPoint> points = new ArrayList<UniPoint>();
 
         final String faculty = "Scienze MM.FF.NN";
