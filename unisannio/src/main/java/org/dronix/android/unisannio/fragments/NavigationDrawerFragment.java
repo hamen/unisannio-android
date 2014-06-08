@@ -1,5 +1,6 @@
 package org.dronix.android.unisannio.fragments;
 
+import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 
 import android.support.v7.app.ActionBarActivity;
@@ -24,6 +25,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 /**
@@ -41,6 +44,9 @@ public class NavigationDrawerFragment extends Fragment {
      * Per the design guidelines, you should show the drawer on launch until the user manually expands it. This shared preference tracks this.
      */
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
+
+    @Inject
+    ActionBar mActionBar;
 
     /**
      * A pointer to the current callbacks instance (the Activity).
@@ -64,12 +70,15 @@ public class NavigationDrawerFragment extends Fragment {
 
     private boolean mUserLearnedDrawer;
 
+    private String[] mMenuItemsTitles;
+
     public NavigationDrawerFragment() {
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MainActivity) getActivity()).inject(this);
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
@@ -80,6 +89,14 @@ public class NavigationDrawerFragment extends Fragment {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
+
+        mMenuItemsTitles = new String[]{
+                getString(R.string.title_section1),
+                getString(R.string.title_section2),
+                getString(R.string.title_section3),
+                getString(R.string.title_section4),
+                getString(R.string.title_section5),
+        };
 
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
@@ -101,17 +118,12 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 R.layout.navigation_drawer_item,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                        getString(R.string.title_section4),
-                        getString(R.string.title_section5),
-                }
+                mMenuItemsTitles
         ));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
@@ -196,6 +208,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
+
         if (mDrawerListView != null) {
             mDrawerListView.setItemChecked(position, true);
         }

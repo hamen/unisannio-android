@@ -1,9 +1,12 @@
 package org.dronix.android.unisannio.fragments;
 
 import org.dronix.android.unisannio.R;
+import org.dronix.android.unisannio.adapters.ArticleAdapter;
 import org.dronix.android.unisannio.adapters.NewsAdapter;
+import org.dronix.android.unisannio.models.Article;
 import org.dronix.android.unisannio.models.News;
 import org.dronix.android.unisannio.parsers.AteneoParser;
+import org.dronix.android.unisannio.parsers.ScienzeParser;
 import org.dronix.android.unisannio.retrievers.NewsRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
@@ -18,18 +21,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observer;
 
-public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ScienzeAvvisiFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private List<News> mNewsList;
+    private List<Article> mNewsList;
 
-    private NewsAdapter mAdapter;
+    private ArticleAdapter mAdapter;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -43,14 +45,14 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
         mSwipeRefreshLayout.setColorScheme(R.color.unisannio_blue, R.color.unisannio_yellow, R.color.unisannio_blue, R.color.unisannio_yellow);
         mSwipeRefreshLayout.setEnabled(true);
 
-        mNewsList = new ArrayList<News>();
-        mAdapter = new NewsAdapter(inflater, mNewsList);
+        mNewsList = new ArrayList<Article>();
+        mAdapter = new ArticleAdapter(inflater, mNewsList);
         listView.setAdapter(mAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Uri uri = Uri.parse(URLS.ATENEO_DETAIL_BASE_URL + mNewsList.get(position).getId());
+                Uri uri = Uri.parse(URLS.SCIENZE);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
@@ -69,7 +71,7 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
     private void refreshList() {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        NewsRetriever.getNewsList(URLS.ATENEO_NEWS, new AteneoParser())
+        NewsRetriever.getNewsList(URLS.SCIENZE_NEWS, new ScienzeParser())
                 .subscribe(new Observer<List<?>>() {
                     @Override
                     public void onCompleted() {
@@ -84,7 +86,7 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
                     @Override
                     public void onNext(List<?> list) {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        mAdapter.setNewsList((List<News>) list);
+                        mAdapter.setNewsList((List<Article>) list);
                     }
                 });
     }

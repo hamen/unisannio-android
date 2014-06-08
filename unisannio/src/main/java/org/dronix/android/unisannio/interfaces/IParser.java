@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface IParser {
 
-    public abstract List<News> parse(Document document);
+    public abstract <T> List<T> parse(Document document);
 }

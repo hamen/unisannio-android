@@ -20,12 +20,13 @@ import rx.schedulers.Schedulers;
 
 public class NewsRetriever {
 
-    public static Observable<List<News>> getNewsList(final String url, final IParser parser) {
+    public static <T> Observable<List<T>> getNewsList(final String url, final IParser parser) {
         return Observable
-                .create(new Observable.OnSubscribe<List<News>>() {
+                .create(new Observable.OnSubscribe<List<T>>() {
                     @Override
-                    public void call(Subscriber<? super List<News>> subscriber) {
-                        subscriber.onNext(get(url, parser));
+                    public void call(Subscriber<? super List<T>> subscriber) {
+                        List<T> list = get(url, parser);
+                        subscriber.onNext(list);
                         subscriber.onCompleted();
                     }
                 })
@@ -33,13 +34,13 @@ public class NewsRetriever {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static List<News> get(String url, IParser parser) {
-        List<News> newsList;
+    private static <T> List<T> get(String url, IParser parser) {
+        List<T> newsList;
         try {
             Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
             newsList = parser.parse(doc);
         } catch (Exception e) {
-            return new ArrayList<News>();
+            return new ArrayList<T>();
         }
         return newsList;
     }

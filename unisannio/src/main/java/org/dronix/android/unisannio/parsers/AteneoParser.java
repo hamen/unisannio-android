@@ -12,8 +12,8 @@ import java.util.List;
 public class AteneoParser implements IParser {
 
     @Override
-    public List<News> parse(Document doc) {
-        List<News> newsList = new ArrayList<News>();
+    public <T> List<T> parse(Document doc) {
+        List<T> newsList = new ArrayList<>();
 
         Elements newsItems = doc.select("div.meta > table > tbody > tr");
 
@@ -35,7 +35,7 @@ public class AteneoParser implements IParser {
             }
 
             if (date != null && body != null) {
-                newsList.add(new News(date, body, id));
+                newsList.add((T) new News(date, body, id));
             }
         }
         return newsList;
