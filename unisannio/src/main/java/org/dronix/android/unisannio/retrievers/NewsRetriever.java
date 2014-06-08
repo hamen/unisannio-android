@@ -1,5 +1,6 @@
 package org.dronix.android.unisannio.retrievers;
 
+import org.dronix.android.unisannio.interfaces.IParser;
 import org.dronix.android.unisannio.models.News;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,12 +20,12 @@ import rx.schedulers.Schedulers;
 
 public class NewsRetriever {
 
-    public static Observable<List<News>> getNewsList(final String url) {
+    public static Observable<List<News>> getNewsList(final String url, final IParser parser) {
         return Observable
                 .create(new Observable.OnSubscribe<List<News>>() {
                     @Override
                     public void call(Subscriber<? super List<News>> subscriber) {
-                        subscriber.onNext(get(url));
+                        subscriber.onNext(get(url, parser));
                         subscriber.onCompleted();
                     }
                 })
@@ -32,34 +33,11 @@ public class NewsRetriever {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static List<News> get(String url) {
-        List<News> newsList = new ArrayList<News>();
-
+    private static List<News> get(String url, IParser parser) {
+        List<News> newsList;
         try {
-            Document doc = Jsoup.connect(url).timeout(10000).get();
-            Elements newsItems = doc.select("div.meta > table > tbody > tr");
-
-            for (int i = 2; i < newsItems.size(); i++) {
-                String date = null;
-                Element dateElement = newsItems.get(i).select("p").first();
-                if (dateElement != null) {
-                    date = dateElement.text();
-                }
-
-                String body = null;
-                Element bodyElement = newsItems.get(i).select("a").first();
-                String id = "";
-                if (bodyElement != null) {
-                    body = bodyElement.text();
-
-                    String href = bodyElement.attr("href");
-                    id = href.substring(href.indexOf("=") + 1);
-                }
-
-                if (date != null && body != null) {
-                    newsList.add(new News(date, body, id));
-                }
-            }
+            Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
+            newsList = parser.parse(doc);
         } catch (Exception e) {
             return new ArrayList<News>();
         }

@@ -3,6 +3,7 @@ package org.dronix.android.unisannio.fragments;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.NewsAdapter;
 import org.dronix.android.unisannio.models.News;
+import org.dronix.android.unisannio.parsers.AteneoParser;
 import org.dronix.android.unisannio.retrievers.NewsRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
@@ -68,7 +69,7 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
     private void refreshList() {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        NewsRetriever.getNewsList(URLS.ATENEO_NEWS)
+        NewsRetriever.getNewsList(URLS.ATENEO_NEWS, new AteneoParser())
                 .subscribe(new Observer<List<News>>() {
                     @Override
                     public void onCompleted() {
