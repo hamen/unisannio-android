@@ -1,6 +1,5 @@
 package org.dronix.android.unisannio.parsers;
 
-import org.dronix.android.unisannio.interfaces.IParser;
 import org.dronix.android.unisannio.models.News;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -9,11 +8,10 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AteneoParser implements IParser {
+public class AteneoParser {
 
-    @Override
-    public <T> List<T> parse(Document doc) {
-        List<T> newsList = new ArrayList<>();
+    public List<News> parse(Document doc) {
+        List<News> newsList = new ArrayList<>();
 
         Elements newsItems = doc.select("div.meta > table > tbody > tr");
 
@@ -35,7 +33,7 @@ public class AteneoParser implements IParser {
             }
 
             if (date != null && body != null) {
-                newsList.add((T) new News(date, body, id));
+                newsList.add(new News(date, body, id));
             }
         }
         return newsList;

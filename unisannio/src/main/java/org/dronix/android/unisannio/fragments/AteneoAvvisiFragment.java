@@ -4,7 +4,7 @@ import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.NewsAdapter;
 import org.dronix.android.unisannio.models.News;
 import org.dronix.android.unisannio.parsers.AteneoParser;
-import org.dronix.android.unisannio.retrievers.NewsRetriever;
+import org.dronix.android.unisannio.retrievers.AteneoRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
 import android.content.Intent;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +68,8 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
     private void refreshList() {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        NewsRetriever.getNewsList(URLS.ATENEO_NEWS, new AteneoParser())
-                .subscribe(new Observer<List<?>>() {
+        AteneoRetriever.getNewsList(URLS.ATENEO_NEWS)
+                .subscribe(new Observer<List<News>>() {
                     @Override
                     public void onCompleted() {
 
@@ -82,9 +81,9 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
                     }
 
                     @Override
-                    public void onNext(List<?> list) {
+                    public void onNext(List<News> list) {
                         mSwipeRefreshLayout.setRefreshing(false);
-                        mAdapter.setNewsList((List<News>) list);
+                        mAdapter.setNewsList(list);
                     }
                 });
     }

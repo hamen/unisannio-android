@@ -3,18 +3,11 @@ package org.dronix.android.unisannio.fragments;
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.ArticleAdapter;
-import org.dronix.android.unisannio.adapters.NewsAdapter;
 import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.models.News;
-import org.dronix.android.unisannio.parsers.AteneoParser;
-import org.dronix.android.unisannio.parsers.Parsers;
 import org.dronix.android.unisannio.parsers.ScienzeParser;
-import org.dronix.android.unisannio.retrievers.NewsRetriever;
 import org.dronix.android.unisannio.retrievers.ScienzeRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -85,7 +78,7 @@ public class ScienzeAvvisiFragment extends Fragment implements SwipeRefreshLayou
     private void refreshList() {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        ScienzeRetriever.getArticles(URLS.SCIENZE_NEWS, new ScienzeParser())
+        ScienzeRetriever.getArticles(URLS.SCIENZE_NEWS)
                 .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
