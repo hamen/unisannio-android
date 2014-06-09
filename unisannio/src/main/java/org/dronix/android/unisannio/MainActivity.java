@@ -1,6 +1,7 @@
 package org.dronix.android.unisannio;
 
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
+import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 
@@ -95,6 +96,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                         .commit();
                 break;
             case 1:
+                mTitle = getString(R.string.title_section2);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, IngegneriaLandingFragment.newInstance())
+                        .commit();
             case 2:
             case 3:
                 break;

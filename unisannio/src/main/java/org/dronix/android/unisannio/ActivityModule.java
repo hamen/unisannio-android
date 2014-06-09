@@ -2,6 +2,8 @@ package org.dronix.android.unisannio;
 
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
+import org.dronix.android.unisannio.fragments.IngegneriaAvvisiFragment;
+import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
@@ -27,6 +29,8 @@ import dagger.Provides;
                 ScienzeAvvisiFragment.class,
                 AteneoLandingFragment.class,
                 AteneoAvvisiFragment.class,
+                IngegneriaLandingFragment.class,
+                IngegneriaAvvisiFragment.class,
                 MapFragment.class,
                 NavigationDrawerFragment.class        },
         addsTo = AndroidModule.class,
