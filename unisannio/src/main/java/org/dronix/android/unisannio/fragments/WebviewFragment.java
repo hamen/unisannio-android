@@ -10,6 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import org.dronix.android.unisannio.R;
+import org.dronix.android.unisannio.parsers.Parsers;
 
 public class WebviewFragment extends Fragment {
 
@@ -32,5 +33,15 @@ public class WebviewFragment extends Fragment {
         webView.loadUrl(bundle.getString("URL"));
 
         return rootView;
+    }
+
+    public static WebviewFragment newInstance(String url) {
+        Bundle bundle = new Bundle();
+        bundle.putString("URL", url);
+
+        WebviewFragment fragment = new WebviewFragment();
+        fragment.setArguments(bundle);
+
+        return fragment;
     }
 }
