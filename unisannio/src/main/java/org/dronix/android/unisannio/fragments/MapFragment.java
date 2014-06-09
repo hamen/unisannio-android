@@ -109,12 +109,16 @@ public class MapFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (mMap != null) {
-            UniApp.getActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .remove(UniApp.getActivity().getSupportFragmentManager().findFragmentById(R.id.location_map))
-                    .commit();
-            mMap = null;
+        try {
+            if (mMap != null) {
+                UniApp.getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .remove(UniApp.getActivity().getSupportFragmentManager().findFragmentById(R.id.location_map))
+                        .commit();
+                mMap = null;
+            }
+        } catch (IllegalStateException e) {
+            // Just gimme a break!
         }
     }
 }
