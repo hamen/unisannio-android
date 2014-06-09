@@ -16,9 +16,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/listView"
-                android:dividerHeight="5dp"
+                android:clipToPadding="false"
+
+                android:dividerHeight="10dp"
                 android:divider="@color/unisannio_blue"
-                android:background="@color/unisannio_blue"
-                android:padding="5dip"/>
+
+                android:padding="10dp"
+
+                android:scrollbarStyle="outsideOverlay"
+
+                android:background="@color/unisannio_blue"/>
     </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

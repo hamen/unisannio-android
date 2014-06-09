@@ -3,7 +3,6 @@ package org.dronix.android.unisannio.fragments;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.NewsAdapter;
 import org.dronix.android.unisannio.models.News;
-import org.dronix.android.unisannio.parsers.AteneoParser;
 import org.dronix.android.unisannio.retrievers.AteneoRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
@@ -34,7 +33,7 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_ateneo_avvisi, container, false);
+        final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_avvisi, container, false);
 
         final ListView listView = (ListView) rootView.findViewById(R.id.listView);
         mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.ptr_layout);
