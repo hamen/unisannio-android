@@ -4,6 +4,7 @@ import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -35,11 +36,20 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
     private ObjectGraph activityGraph;
 
+    private boolean mIsTablet;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         UniApp.setActivity(this);
+
+        mIsTablet = getResources().getBoolean(R.bool.isTablet);
+        if (mIsTablet) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        } else {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
         // Create the activity graph by .plus-ing our modules onto the application graph.
         UniApp application = (UniApp) getApplication();
