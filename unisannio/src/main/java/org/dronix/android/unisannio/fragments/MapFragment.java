@@ -9,10 +9,8 @@ import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.UniApp;
 import org.dronix.android.unisannio.models.UniPoint;
-import org.dronix.android.unisannio.settings.UnisannioGeoData;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;

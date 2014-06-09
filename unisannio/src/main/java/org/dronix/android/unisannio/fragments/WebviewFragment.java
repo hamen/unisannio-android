@@ -1,6 +1,8 @@
 package org.dronix.android.unisannio.fragments;
 
 
+import org.dronix.android.unisannio.R;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,9 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-
-import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.parsers.Parsers;
 
 public class WebviewFragment extends Fragment {
 

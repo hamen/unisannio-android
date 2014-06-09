@@ -2,7 +2,6 @@ package org.dronix.android.unisannio.adapters;
 
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.models.News;
 
 import android.view.LayoutInflater;
 import android.view.View;

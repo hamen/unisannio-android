@@ -2,20 +2,19 @@ package org.dronix.android.unisannio;
 
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
-import org.dronix.android.unisannio.fragments.DetailFragment;
-import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
+import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.ScienzeAvvisiFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 
+import javax.inject.Singleton;
+
 import dagger.Module;
 import dagger.Provides;
-
-import javax.inject.Singleton;
 
 /**
  * This module represents objects which exist only for the scope of a single activity. We can safely create singletons using the activity instance

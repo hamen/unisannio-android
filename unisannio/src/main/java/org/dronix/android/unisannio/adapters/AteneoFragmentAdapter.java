@@ -4,10 +4,8 @@ import com.google.android.gms.maps.GoogleMap;
 
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
-import org.dronix.android.unisannio.fragments.WebviewFragment;
 import org.dronix.android.unisannio.settings.UnisannioGeoData;
 
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

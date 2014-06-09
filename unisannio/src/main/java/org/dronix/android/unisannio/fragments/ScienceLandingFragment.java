@@ -4,10 +4,7 @@ import com.viewpagerindicator.TitlePageIndicator;
 
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.adapters.AteneoFragmentAdapter;
 import org.dronix.android.unisannio.adapters.ScienzeFragmentAdapter;
-import org.dronix.android.unisannio.settings.Adapters;
-import org.dronix.android.unisannio.settings.URLS;
 
 import android.app.Activity;
 import android.content.Intent;
