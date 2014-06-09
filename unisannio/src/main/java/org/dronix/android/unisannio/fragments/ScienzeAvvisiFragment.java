@@ -41,20 +41,20 @@ public class ScienzeAvvisiFragment extends Fragment implements SwipeRefreshLayou
 
     private ArticleAdapter mAdapter;
 
-    private SwipeRefreshLayout mSwipeRefreshLayout;
+    @InjectView(R.id.ptr_layout)
+    SwipeRefreshLayout mSwipeRefreshLayout;
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_avvisi, container, false);
         ButterKnife.inject(this, rootView);
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.ptr_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorScheme(R.color.unisannio_blue, R.color.unisannio_yellow, R.color.unisannio_blue, R.color.unisannio_yellow);
         mSwipeRefreshLayout.setEnabled(true);
 
         mNewsList = new ArrayList<Article>();
-        mAdapter = new ArticleAdapter(inflater, (List<Article>) mNewsList, new ListItemButtonClickListener());
+        mAdapter = new ArticleAdapter(inflater, mNewsList, new ListItemButtonClickListener());
         mListView.setAdapter(mAdapter);
 
         refreshList();
