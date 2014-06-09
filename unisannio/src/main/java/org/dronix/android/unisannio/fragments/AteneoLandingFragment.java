@@ -33,13 +33,13 @@ public class AteneoLandingFragment extends Fragment {
     private FragmentPagerAdapter mAdapter;
 
     public static AteneoLandingFragment newInstance() {
-        AteneoLandingFragment fragment = new AteneoLandingFragment();
-        return fragment;
+        return new AteneoLandingFragment();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ((MainActivity) getActivity()).inject(this);
     }
 
     @Override
@@ -48,24 +48,15 @@ public class AteneoLandingFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
         mAdapter = new AteneoFragmentAdapter(getChildFragmentManager());
-
         mPager.setAdapter(mAdapter);
 
-        //Bind the title indicator to the adapter
         TitlePageIndicator titleIndicator = (TitlePageIndicator) rootView.findViewById(R.id.titles);
         titleIndicator.setViewPager(mPager);
         titleIndicator.setCurrentItem(0);
 
         return rootView;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        ((MainActivity) getActivity()).inject(this);
     }
 
     @Override
