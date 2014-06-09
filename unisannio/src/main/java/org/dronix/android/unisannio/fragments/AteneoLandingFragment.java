@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 
 import javax.inject.Inject;
 
-public class LandingFragment extends Fragment {
+public class AteneoLandingFragment extends Fragment {
 
     @Inject
     NavigationDrawerFragment mNavigationDrawerFragment;
@@ -34,40 +34,14 @@ public class LandingFragment extends Fragment {
 
     private FragmentPagerAdapter mAdapter;
 
-    private int mMenuLayout;
-
-    private String mUrl;
-
-    public static LandingFragment newInstance(Adapters adapterId, int position) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ADAPTER", adapterId);
-        bundle.putInt("SECTION", position);
-
-        LandingFragment fragment = new LandingFragment();
-        fragment.setArguments(bundle);
-
+    public static AteneoLandingFragment newInstance() {
+        AteneoLandingFragment fragment = new AteneoLandingFragment();
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Bundle bundle = getArguments();
-        Adapters adapterId = (Adapters) bundle.getSerializable("ADAPTER");
-
-        switch (adapterId) {
-            case ATENEO:
-                mMenuLayout = R.menu.ateneo;
-                mUrl = URLS.ATENEO;
-                mAdapter = new AteneoFragmentAdapter(getChildFragmentManager());
-                break;
-            case SCIENZE:
-                mMenuLayout = R.menu.scienze;
-                mUrl = URLS.SCIENZE;
-                mAdapter = new ScienzeFragmentAdapter(getChildFragmentManager());
-                break;
-        }
     }
 
     @Override
@@ -78,6 +52,8 @@ public class LandingFragment extends Fragment {
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) rootView.findViewById(R.id.pager);
+        mAdapter = new AteneoFragmentAdapter(getChildFragmentManager());
+
         mPager.setAdapter(mAdapter);
 
         //Bind the title indicator to the adapter
@@ -97,14 +73,13 @@ public class LandingFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
-        ((MainActivity) activity).onSectionAttached(getArguments().getInt("SECTION"));
+        ((MainActivity) activity).onSectionAttached(1);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            inflater.inflate(mMenuLayout, menu);
+            inflater.inflate(R.menu.ateneo, menu);
         }
     }
 
@@ -112,15 +87,10 @@ public class LandingFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_website) {
-            Uri uri = Uri.parse(mUrl);
+            Uri uri = Uri.parse(URLS.ATENEO);
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
             return true;
-        } else if (id == R.id.action_contact) {
-            String recepientEmail = "presidio.didattico.scienze@unisannio.it";
-            Intent intent = new Intent(Intent.ACTION_SENDTO);
-            intent.setData(Uri.parse("mailto:" + recepientEmail));
-            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

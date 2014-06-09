@@ -13,19 +13,19 @@ import java.util.List;
 public class ScienzeParser implements IParser {
 
     @Override
-    public <T> List<T> parse(Document document) {
+    public List<Article> parse(Document document) {
         Elements newsItems = document.select("li.latestnewsfl_green");
 
-        List<T> newsList = new ArrayList<>();
-        for (int i = 0; i < newsItems.size(); i++) {
+        List<Article> newsList = new ArrayList<>();
+        for (Element newsItem : newsItems) {
             String date = null;
-            Element dateElement = newsItems.get(i).select("span").first();
+            Element dateElement = newsItem.select("span").first();
             if (dateElement != null) {
                 date = dateElement.text().trim();
             }
 
             String title = null;
-            Element bodyElement = newsItems.get(i).select("a").first();
+            Element bodyElement = newsItem.select("a").first();
             String link = null;
             if (bodyElement != null) {
                 title = bodyElement.text();
@@ -33,20 +33,20 @@ public class ScienzeParser implements IParser {
             }
 
             if (date != null && title != null) {
-                newsList.add((T) new Article(title, link, null, date, null));
+                newsList.add(new Article(title, link, null, date, null));
             }
         }
 
         newsItems = document.select("li.latestnewsfl_orange");
-        for (int i = 0; i < newsItems.size(); i++) {
+        for (Element newsItem : newsItems) {
             String date = null;
-            Element dateElement = newsItems.get(i).select("span").first();
+            Element dateElement = newsItem.select("span").first();
             if (dateElement != null) {
                 date = dateElement.text().trim();
             }
 
             String title = null;
-            Element bodyElement = newsItems.get(i).select("a").first();
+            Element bodyElement = newsItem.select("a").first();
             String link = null;
             if (bodyElement != null) {
                 title = bodyElement.text();
@@ -54,9 +54,9 @@ public class ScienzeParser implements IParser {
             }
 
             if (date != null && title != null) {
-                newsList.add((T) new Article(title, link, null, date, null));
+                newsList.add(new Article(title, link, null, date, null));
             }
         }
-        return (List<T>) newsList;
+        return newsList;
     }
 }

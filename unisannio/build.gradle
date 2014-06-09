@@ -71,5 +71,4 @@ dependencies {
     apt 'com.squareup.dagger:dagger-compiler:1.2.1'
 
     compile 'eu.inmite.android.lib:android-styled-dialogs:1.1.2@aar'
-
 }

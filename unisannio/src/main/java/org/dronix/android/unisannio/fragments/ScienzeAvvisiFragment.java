@@ -1,19 +1,23 @@
 package org.dronix.android.unisannio.fragments;
 
+import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.ArticleAdapter;
 import org.dronix.android.unisannio.adapters.NewsAdapter;
 import org.dronix.android.unisannio.models.Article;
 import org.dronix.android.unisannio.models.News;
 import org.dronix.android.unisannio.parsers.AteneoParser;
+import org.dronix.android.unisannio.parsers.Parsers;
 import org.dronix.android.unisannio.parsers.ScienzeParser;
 import org.dronix.android.unisannio.retrievers.NewsRetriever;
+import org.dronix.android.unisannio.retrievers.ScienzeRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,9 +29,14 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import rx.Observer;
 
 public class ScienzeAvvisiFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+
+    @Inject
+    FragmentManager mFragmentManager;
 
     private List<Article> mNewsList;
 
@@ -46,15 +55,20 @@ public class ScienzeAvvisiFragment extends Fragment implements SwipeRefreshLayou
         mSwipeRefreshLayout.setEnabled(true);
 
         mNewsList = new ArrayList<Article>();
-        mAdapter = new ArticleAdapter(inflater, mNewsList);
+        mAdapter = new ArticleAdapter(inflater, (List<Article>) mNewsList);
         listView.setAdapter(mAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Uri uri = Uri.parse(URLS.SCIENZE);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+
+                Article article = mNewsList.get(position);
+
+                mFragmentManager
+                        .beginTransaction()
+                        .addToBackStack("scienze_detail")
+                        .replace(R.id.container, WebviewFragment.newInstance(URLS.SCIENZE + article.getLink()))
+                        .commit();
             }
         });
 
@@ -71,8 +85,8 @@ public class ScienzeAvvisiFragment extends Fragment implements SwipeRefreshLayou
     private void refreshList() {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        NewsRetriever.getNewsList(URLS.SCIENZE_NEWS, new ScienzeParser())
-                .subscribe(new Observer<List<?>>() {
+        ScienzeRetriever.getArticles(URLS.SCIENZE_NEWS, new ScienzeParser())
+                .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
 
@@ -84,10 +98,17 @@ public class ScienzeAvvisiFragment extends Fragment implements SwipeRefreshLayou
                     }
 
                     @Override
-                    public void onNext(List<?> list) {
+                    public void onNext(List<Article> list) {
+                        mNewsList = list;
                         mSwipeRefreshLayout.setRefreshing(false);
-                        mAdapter.setNewsList((List<Article>) list);
+                        mAdapter.setNewsList(list);
                     }
                 });
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ((MainActivity) getActivity()).inject(this);
     }
 }

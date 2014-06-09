@@ -1,6 +1,7 @@
 package org.dronix.android.unisannio;
 
-import org.dronix.android.unisannio.fragments.LandingFragment;
+import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
+import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.settings.Adapters;
 
@@ -81,7 +82,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             case 0:
                 mTitle = getString(R.string.title_section1);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, LandingFragment.newInstance(Adapters.ATENEO, ++position))
+                        .replace(R.id.container, AteneoLandingFragment.newInstance())
                         .commit();
                 break;
             case 1:
@@ -91,7 +92,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             case 4:
                 mTitle = getString(R.string.title_section5);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, LandingFragment.newInstance(Adapters.SCIENZE, ++position))
+                        .replace(R.id.container, ScienceLandingFragment.newInstance())
                         .commit();
                 break;
         }

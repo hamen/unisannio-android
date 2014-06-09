@@ -1,15 +1,10 @@
 package org.dronix.android.unisannio.retrievers;
 
 import org.dronix.android.unisannio.interfaces.IParser;
-import org.dronix.android.unisannio.models.News;
+import org.dronix.android.unisannio.models.Article;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import java.io.IOException;
-import java.lang.reflect.AnnotatedElement;
-import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,14 +13,14 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class NewsRetriever {
+public class ScienzeRetriever {
 
-    public static Observable<List<News>> getNewsList(final String url, final IParser parser) {
+    public static Observable<List<Article>> getArticles(final String url, final IParser parser) {
         return Observable
-                .create(new Observable.OnSubscribe<List<News>>() {
+                .create(new Observable.OnSubscribe<List<Article>>() {
                     @Override
-                    public void call(Subscriber<? super List<News>> subscriber) {
-                        List<News> list = get(url, parser);
+                    public void call(Subscriber<? super List<Article>> subscriber) {
+                        List<Article> list = get(url, parser);
                         subscriber.onNext(list);
                         subscriber.onCompleted();
                     }
@@ -34,13 +29,13 @@ public class NewsRetriever {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    private static List<News> get(String url, IParser parser) {
-        List<News> newsList;
+    private static List<Article> get(String url, IParser parser) {
+        List<Article> newsList;
         try {
             Document doc = Jsoup.connect(url).timeout(10 * 1000).get();
             newsList = parser.parse(doc);
         } catch (Exception e) {
-            return new ArrayList<News>();
+            return new ArrayList<>();
         }
         return newsList;
     }
