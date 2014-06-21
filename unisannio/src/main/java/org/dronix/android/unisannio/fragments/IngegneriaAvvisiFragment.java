@@ -98,7 +98,7 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("UNISANNIO", e.getMessage());
+                        mLogger.error(e.getMessage());
                     }
 
                     @Override
