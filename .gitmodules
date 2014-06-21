@@ -1,0 +1,3 @@
+[submodule "libraries/advanced-android-logger"]
+	path = libraries/advanced-android-logger
+	url = git@bitbucket.org:alteregosrls/advanced-android-logger.git

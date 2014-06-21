@@ -1,1 +1,2 @@
 include ':unisannio'
+include ':libraries:advanced-android-logger:app'
