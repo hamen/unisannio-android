@@ -1,5 +1,10 @@
 package org.dronix.android.unisannio;
 
+import com.alterego.advancedandroidlogger.implementations.AndroidLogger;
+import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
+import com.alterego.advancedandroidlogger.implementations.NullAndroidLogger;
+import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
+
 import android.app.Application;
 
 import java.util.Arrays;
@@ -19,11 +24,18 @@ public class UniApp extends Application {
 
     private ObjectGraph applicationGraph;
 
+    @Getter
+    private DetailedAndroidLogger mLogger;
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         applicationGraph = ObjectGraph.create(getModules().toArray());
+        applicationGraph.injectStatics();
+
+        mLogger = new DetailedAndroidLogger("UNISANNIO", IAndroidLogger.LoggingLevel.VERBOSE);
+        mLogger.debug("Logger has been created");
     }
 
     /**

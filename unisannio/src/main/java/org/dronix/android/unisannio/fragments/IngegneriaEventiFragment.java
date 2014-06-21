@@ -32,7 +32,8 @@ public class IngegneriaEventiFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_webview, container, false);
         ButterKnife.inject(this, rootView);
 
-        IngegneriaRetriever
+
+        new IngegneriaRetriever()
                 .getEventi(URLS.INGEGNERIA_EVENTI)
                 .subscribe(new Observer<String>() {
                     @Override

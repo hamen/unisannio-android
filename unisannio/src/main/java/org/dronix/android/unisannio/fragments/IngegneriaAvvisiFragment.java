@@ -1,21 +1,20 @@
 package org.dronix.android.unisannio.fragments;
 
+import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
+
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.ArticleAdapter;
-import org.dronix.android.unisannio.adapters.NewsAdapter;
 import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.models.News;
-import org.dronix.android.unisannio.retrievers.AteneoRetriever;
 import org.dronix.android.unisannio.retrievers.IngegneriaRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +48,12 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
     @InjectView(R.id.ptr_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
 
+    @Inject
+    DetailedAndroidLogger mLogger;
+
+    @Inject
+    IngegneriaRetriever mIngegneriaRetriever;
+
     private List<Article> mNewsList;
 
     private ArticleAdapter mAdapter;
@@ -59,6 +64,8 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_avvisi, container, false);
         ButterKnife.inject(this, rootView);
+        ((MainActivity) getActivity()).inject(this);
+
         mContext = this;
 
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -75,12 +82,6 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        ((MainActivity) getActivity()).inject(this);
-    }
-
-    @Override
     public void onRefresh() {
         refreshList();
     }
@@ -88,7 +89,7 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
     private void refreshList() {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        IngegneriaRetriever.getArticles(URLS.INGEGNERIA_NEWS)
+        mIngegneriaRetriever.getArticles(URLS.INGEGNERIA_NEWS_RSS, URLS.INGEGNERIA_NEWS_PHP)
                 .subscribe(new Observer<List<Article>>() {
                     @Override
                     public void onCompleted() {
@@ -102,8 +103,8 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
 
                     @Override
                     public void onNext(List<Article> list) {
-                        mSwipeRefreshLayout.setRefreshing(false);
                         mAdapter.setNewsList(list);
+                        mSwipeRefreshLayout.setRefreshing(false);
                     }
                 });
     }
@@ -139,7 +140,7 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
                     SimpleDialogFragment
                             .createBuilder(mActivity, mFragmentManager)
                             .setTitle(article.getTitle())
-                            .setMessage(article.getDescription())
+                            .setMessage(Html.fromHtml(article.getDescription()))
                             .setPositiveButtonText("Share")
                             .setNegativeButtonText("Close")
                             .setTargetFragment(mContext, i)

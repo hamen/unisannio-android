@@ -1,5 +1,8 @@
 package org.dronix.android.unisannio;
 
+import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
+import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
+
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
@@ -16,6 +19,8 @@ import android.view.MenuItem;
 
 import java.util.Arrays;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import dagger.ObjectGraph;
 import lombok.Getter;
@@ -38,6 +43,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     private ObjectGraph activityGraph;
 
     private boolean mIsTablet;
+
+    @Inject
+    DetailedAndroidLogger mLogger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        mLogger.debug("Starting...");
     }
 
     protected List<Object> getModules() {
