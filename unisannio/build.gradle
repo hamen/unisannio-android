@@ -28,14 +28,16 @@ android {
         versionName "0.6"
     }
     buildTypes {
+
         release {
-            runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
         }
     }
 
     lintOptions {
         disable 'InvalidPackage'
+        abortOnError false
     }
 
     packagingOptions {
