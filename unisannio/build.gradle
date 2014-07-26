@@ -10,7 +10,7 @@ buildscript {
     }
 }
 
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 apply plugin: 'crashlytics'
 apply plugin: 'android-apt'
 
@@ -21,13 +21,13 @@ repositories {
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 20
+    buildToolsVersion "20"
 
     defaultConfig {
         applicationId "org.dronix.android.unisannio"
         minSdkVersion 10
-        targetSdkVersion 19
+        targetSdkVersion 20
         versionCode 13
         versionName "0.7"
     }
