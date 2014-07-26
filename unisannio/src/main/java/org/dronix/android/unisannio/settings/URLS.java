@@ -21,4 +21,10 @@ public class URLS {
     public static final String INGEGNERIA_EVENTI = "http://www.ing.unisannio.it/eventi/index.html";
 
     public static final String INGEGNERIA_EVENTI_BASE_URL = "http://www.ing.unisannio.it/eventi/";
+
+    public static final String GIURISPRUDENZA = "http://www.giurisprudenza.unisannio.it";
+
+    public static final String GIURISPRUDENZA_AVVISI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_rss&catid=2";
+
+    public static final String GIURISPRUDENZA_COMUNICAZIONI = "http://www.giurisprudenza.unisannio.it/index.php?option=com_rss&catid=1";
 }

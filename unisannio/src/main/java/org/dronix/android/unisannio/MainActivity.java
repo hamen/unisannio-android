@@ -5,6 +5,7 @@ import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 
 import com.crashlytics.android.Crashlytics;
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
+import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
@@ -113,6 +114,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                         .replace(R.id.container, IngegneriaLandingFragment.newInstance())
                         .commit();
             case 2:
+                mTitle = getString(R.string.title_section3);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, GiurisprudenzaLandingFragment.newInstance())
+                        .commit();
             case 3:
                 break;
             case 4:

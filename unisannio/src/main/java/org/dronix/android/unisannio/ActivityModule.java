@@ -2,12 +2,15 @@ package org.dronix.android.unisannio;
 
 import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
+import org.dronix.android.unisannio.fragments.GiurisprudenzaAvvisiFragment;
+import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.ScienzeAvvisiFragment;
+import org.dronix.android.unisannio.retrievers.GiurisprudenzaRetriever;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -31,8 +34,10 @@ import dagger.Provides;
                 AteneoAvvisiFragment.class,
                 IngegneriaLandingFragment.class,
                 IngegneriaAvvisiFragment.class,
+                GiurisprudenzaLandingFragment.class,
+                GiurisprudenzaAvvisiFragment.class,
                 MapFragment.class,
-                NavigationDrawerFragment.class        },
+                NavigationDrawerFragment.class},
         addsTo = AndroidModule.class,
         library = true
 )
