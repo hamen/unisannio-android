@@ -4,7 +4,7 @@ buildscript {
         maven { url 'http://download.crashlytics.com/maven' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.+'
+        classpath 'com.android.tools.build:gradle:0.12.2'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.2'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
@@ -28,8 +28,8 @@ android {
         applicationId "org.dronix.android.unisannio"
         minSdkVersion 10
         targetSdkVersion 20
-        versionCode 13
-        versionName "0.7"
+        versionCode 14
+        versionName "0.8"
     }
     signingConfigs {
 
