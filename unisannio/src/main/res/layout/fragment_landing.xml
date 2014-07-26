@@ -11,7 +11,7 @@
             android:textColor="#AA000000"
             app:selectedColor="#FF000000"
             app:selectedBold="true"
-            app:footerColor="@color/unisannio_blue"
+            app:footerColor="@color/unisannio_yellow"
             app:footerLineHeight="1dp"
             app:footerIndicatorHeight="3dp"
             app:footerIndicatorStyle="underline"
