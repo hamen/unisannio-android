@@ -17,6 +17,8 @@
                 android:layout_height="match_parent"
                 android:id="@+id/listView"
 
+                android:clipToPadding="false"
+                
                 android:numColumns="@integer/avvisi_columns"
 
                 android:horizontalSpacing="@dimen/avvisi_gridview_divider"
