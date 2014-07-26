@@ -21,4 +21,5 @@
 
     <color name="light_grey">#f0f0f0</color>
     <color name="super_light_grey">#f6f6f6</color>
+    <color name="avvisi_card_button_bg">#ffffff</color>
 </resources>

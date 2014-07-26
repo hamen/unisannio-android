@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -42,17 +43,17 @@ public class NewsAdapter extends BaseAdapter {
         return position;
     }
 
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View recycledView, ViewGroup parent) {
         ViewHolder holder;
 
-        if (convertView == null) {
-            convertView = mInflater.inflate(R.layout.list_item_card, null);
+        if (recycledView == null) {
+            recycledView = mInflater.inflate(R.layout.list_item_card, null);
 
-            holder = new ViewHolder(convertView);
-            convertView.setTag(holder);
+            holder = new ViewHolder(recycledView);
+            recycledView.setTag(holder);
 
         } else {
-            holder = (ViewHolder) convertView.getTag();
+            holder = (ViewHolder) recycledView.getTag();
         }
 
         News article = getItem(position);
@@ -65,7 +66,7 @@ public class NewsAdapter extends BaseAdapter {
             holder.itemButton2.setOnClickListener(mItemButtonClickListener);
         }
 
-        return convertView;
+        return recycledView;
     }
 
     public void setNewsList(List<News> newsList) {
@@ -83,10 +84,10 @@ public class NewsAdapter extends BaseAdapter {
         TextView title;
 
         @InjectView(R.id.list_item_card_button_1)
-        Button itemButton1;
+        LinearLayout itemButton1;
 
         @InjectView(R.id.list_item_card_button_2)
-        Button itemButton2;
+        LinearLayout itemButton2;
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);

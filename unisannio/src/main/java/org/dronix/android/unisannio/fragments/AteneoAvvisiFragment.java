@@ -19,6 +19,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
     FragmentManager mFragmentManager;
 
     @InjectView(R.id.listView)
-    ListView mListView;
+    GridView mListView;
 
     @InjectView(R.id.ptr_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;

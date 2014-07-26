@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="small_margin">5dp</dimen>
+
+    <dimen name="avvisi_card_vertical_separator_width">2dp</dimen>
+    <dimen name="avvisi_card_title_height">60dp</dimen>
+
+    <dimen name="tiny_margin">2dp</dimen>
+</resources>

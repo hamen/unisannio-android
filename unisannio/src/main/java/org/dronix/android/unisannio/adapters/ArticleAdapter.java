@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -87,10 +88,10 @@ public class ArticleAdapter extends BaseAdapter {
         TextView title;
 
         @InjectView(R.id.list_item_card_button_1)
-        Button itemButton1;
+        LinearLayout itemButton1;
 
         @InjectView(R.id.list_item_card_button_2)
-        Button itemButton2;
+        LinearLayout itemButton2;
 
         public ViewHolder(View view) {
             ButterKnife.inject(this, view);

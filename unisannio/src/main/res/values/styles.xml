@@ -3,7 +3,8 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_margin">5dip</item>
         <item name="android:minLines">2</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/avvisi_card_title_text</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <dimen name="avvisi_card_title_text">14sp</dimen>
 </resources>
