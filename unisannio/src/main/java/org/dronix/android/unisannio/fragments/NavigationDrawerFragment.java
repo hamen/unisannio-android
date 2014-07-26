@@ -98,6 +98,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getString(R.string.title_section3),
                 getString(R.string.title_section4),
                 getString(R.string.title_section5),
+                getString(R.string.about)
         };
 
         // Select either the default item (0) or the last selected item.
@@ -268,14 +269,6 @@ public class NavigationDrawerFragment extends Fragment {
             return true;
         }
         int id = item.getItemId();
-        if (id == R.id.action_about) {
-            SimpleDialogFragment
-                    .createBuilder(getActivity(), getActivity().getSupportFragmentManager())
-                    .setTitle(mActivity.getString(R.string.about))
-                    .setMessage(mActivity.getString(R.string.author))
-                    .show();
-            return true;
-        }
         return super.onOptionsItemSelected(item);
     }
 

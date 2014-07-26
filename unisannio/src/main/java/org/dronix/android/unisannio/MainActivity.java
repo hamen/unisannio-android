@@ -25,6 +25,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.ObjectGraph;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 
@@ -131,6 +132,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, ScienceLandingFragment.newInstance())
                         .commit();
+                break;
+            case 5:
+                mTitle = getString(R.string.about);
+                SimpleDialogFragment
+                        .createBuilder(this, getSupportFragmentManager())
+                        .setTitle(getString(R.string.about))
+                        .setMessage(getString(R.string.author))
+                        .show();
                 break;
         }
     }
