@@ -19,5 +19,6 @@
     <string name="mail_choice">Scegli un client email…</string>
     <string name="read">Leggi</string>
     <string name="share">Condividi</string>
+    <string name="close">Chiudi</string>
 
 </resources>

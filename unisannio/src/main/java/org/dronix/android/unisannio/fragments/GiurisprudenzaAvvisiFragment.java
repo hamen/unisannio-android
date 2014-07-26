@@ -163,8 +163,8 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements SwipeRefre
                             .createBuilder(mActivity, mFragmentManager)
                             .setTitle(article.getTitle())
                             .setMessage(Html.fromHtml(article.getDescription()))
-                            .setPositiveButtonText("Share")
-                            .setNegativeButtonText("Close")
+                            .setPositiveButtonText(mActivity.getString(R.string.share))
+                            .setNegativeButtonText(mActivity.getString(R.string.close))
                             .setTargetFragment(mContext, i)
                             .show();
                 } else if (v == mListView.getChildAt(i - mListView.getFirstVisiblePosition()).findViewById(R.id.list_item_card_button_2)) {
