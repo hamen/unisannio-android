@@ -21,5 +21,6 @@
     <string name="share">Condividi</string>
     <string name="close">Chiudi</string>
     <string name="author">Sviluppato da Ivan Morgillo</string>
+    <string name="share_via">Condividi con…</string>
 
 </resources>
