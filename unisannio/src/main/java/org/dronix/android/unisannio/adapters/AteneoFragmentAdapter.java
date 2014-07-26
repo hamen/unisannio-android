@@ -20,8 +20,6 @@ public class AteneoFragmentAdapter extends FragmentPagerAdapter {
 
     private int mCount = CONTENT.length;
 
-    private GoogleMap mMap;
-
     public AteneoFragmentAdapter(FragmentManager fm) {
         super(fm);
         mFragmentManager = fm;

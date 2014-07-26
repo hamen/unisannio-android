@@ -8,9 +8,10 @@ import org.dronix.android.unisannio.fragments.IngegneriaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
+import org.dronix.android.unisannio.fragments.SeaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.ScienzeAvvisiFragment;
-import org.dronix.android.unisannio.retrievers.GiurisprudenzaRetriever;
+import org.dronix.android.unisannio.fragments.SeaLandingFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -28,16 +29,25 @@ import dagger.Provides;
 @Module(
         injects = {
                 MainActivity.class,
+
                 ScienceLandingFragment.class,
                 ScienzeAvvisiFragment.class,
+
                 AteneoLandingFragment.class,
                 AteneoAvvisiFragment.class,
+
                 IngegneriaLandingFragment.class,
                 IngegneriaAvvisiFragment.class,
+
                 GiurisprudenzaLandingFragment.class,
                 GiurisprudenzaAvvisiFragment.class,
+
+                SeaLandingFragment.class,
+                SeaAvvisiFragment.class,
+
                 MapFragment.class,
-                NavigationDrawerFragment.class},
+                NavigationDrawerFragment.class
+        },
         addsTo = AndroidModule.class,
         library = true
 )

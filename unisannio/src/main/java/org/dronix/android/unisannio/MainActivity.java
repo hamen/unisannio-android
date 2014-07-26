@@ -1,13 +1,13 @@
 package org.dronix.android.unisannio;
 
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
-import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 
 import com.crashlytics.android.Crashlytics;
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
+import org.dronix.android.unisannio.fragments.SeaLandingFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 
 import android.content.pm.ActivityInfo;
@@ -121,6 +121,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                         .commit();
                 break;
             case 3:
+                mTitle = getString(R.string.title_section4);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.container, SeaLandingFragment.newInstance())
+                        .commit();
                 break;
             case 4:
                 mTitle = getString(R.string.title_section5);
