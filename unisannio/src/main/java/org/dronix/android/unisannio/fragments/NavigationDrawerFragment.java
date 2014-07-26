@@ -71,6 +71,9 @@ public class NavigationDrawerFragment extends Fragment {
 
     private String[] mMenuItemsTitles;
 
+    @Inject
+    MainActivity mActivity;
+
     public NavigationDrawerFragment() {
     }
 
@@ -268,8 +271,8 @@ public class NavigationDrawerFragment extends Fragment {
         if (id == R.id.action_about) {
             SimpleDialogFragment
                     .createBuilder(getActivity(), getActivity().getSupportFragmentManager())
-                    .setTitle("About")
-                    .setMessage("Sviluppato da Ivan Morgillo")
+                    .setTitle(mActivity.getString(R.string.about))
+                    .setMessage(mActivity.getString(R.string.author))
                     .show();
             return true;
         }

@@ -20,5 +20,6 @@
     <string name="read">Leggi</string>
     <string name="share">Condividi</string>
     <string name="close">Chiudi</string>
+    <string name="author">Sviluppato da Ivan Morgillo</string>
 
 </resources>
