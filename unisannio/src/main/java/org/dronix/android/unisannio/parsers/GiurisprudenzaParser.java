@@ -28,6 +28,7 @@ public class GiurisprudenzaParser {
 
             // Clean up pointless prefix
             title = title.replace("[Giurisprudenza] ", "");
+            title = title.replace("[Comunicazioni] ", "");
 
             String description = e.select("description").first().text();
             description = StringEscapeUtils.unescapeHtml4(description);
