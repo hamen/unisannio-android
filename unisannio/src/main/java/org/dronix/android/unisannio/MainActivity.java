@@ -3,6 +3,7 @@ package org.dronix.android.unisannio;
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.alterego.advancedandroidlogger.interfaces.IAndroidLogger;
 
+import com.crashlytics.android.Crashlytics;
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
@@ -50,6 +51,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Crashlytics.start(this);
 
         UniApp.setActivity(this);
 

@@ -1,3 +1,5 @@
+/unisannio/src/main/assets/crashlytics-build.properties
+/unisannio/crashlytics.properties
 .gradle
 /local.properties
 /.idea/workspace.xml
