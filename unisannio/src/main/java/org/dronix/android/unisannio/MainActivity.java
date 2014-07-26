@@ -113,11 +113,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, IngegneriaLandingFragment.newInstance())
                         .commit();
+                break;
             case 2:
                 mTitle = getString(R.string.title_section3);
                 fragmentManager.beginTransaction()
                         .replace(R.id.container, GiurisprudenzaLandingFragment.newInstance())
                         .commit();
+                break;
             case 3:
                 break;
             case 4:
