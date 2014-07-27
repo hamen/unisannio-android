@@ -50,6 +50,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Inject
     DetailedAndroidLogger mLogger;
 
+    private UniApp mApplication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,9 +66,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
-        // Create the activity graph by .plus-ing our modules onto the application graph.
-        UniApp application = (UniApp) getApplication();
-        activityGraph = application.getApplicationGraph().plus(getModules().toArray());
+        // Create the activity graph by .plus-ing our modules onto the mApplication graph.
+        mApplication = (UniApp) getApplication();
+        activityGraph = mApplication.getApplicationGraph().plus(getModules().toArray());
 
         // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
         activityGraph.inject(this);
@@ -90,6 +92,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
      * Inject the supplied {@code object} using the activity-specific graph.
      */
     public void inject(Object object) {
+        if (activityGraph == null) {
+            activityGraph = mApplication.getApplicationGraph().plus(getModules().toArray());
+        }
         activityGraph.inject(object);
     }
 
