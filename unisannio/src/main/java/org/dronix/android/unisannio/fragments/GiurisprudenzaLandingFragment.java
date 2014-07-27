@@ -68,7 +68,7 @@ public class GiurisprudenzaLandingFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+        if (mNavigationDrawerFragment != null && !mNavigationDrawerFragment.isDrawerOpen()) {
             inflater.inflate(R.menu.ateneo, menu);
         }
     }
