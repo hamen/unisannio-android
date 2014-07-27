@@ -65,7 +65,7 @@ public class SeaRetriever {
                     public void call(Subscriber<? super String> subscriber) {
                         Document doc = null;
                         try {
-                            doc = Jsoup.parse(new URL(URLS.SEA + url).openStream(), "UTF-8", URLS.SEA);
+                            doc = Jsoup.connect(URLS.SEA + url).timeout(20 * 1000).get();
                         } catch (IOException e) {
                             subscriber.onError(e);
                         }
