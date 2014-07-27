@@ -1,10 +1,12 @@
 package org.dronix.android.unisannio.adapters;
 
+import org.dronix.android.unisannio.fragments.BlankFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.IngegneriaEventiFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.settings.UnisannioGeoData;
 
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -32,7 +34,12 @@ public class IngegneriaFragmentAdapter extends FragmentPagerAdapter {
                 retval = new IngegneriaAvvisiFragment();
                 break;
             case 2:
-                retval = MapFragment.newInstance(UnisannioGeoData.INGEGNERIA());
+                int currentapiVersion = android.os.Build.VERSION.SDK_INT;
+                if (currentapiVersion >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+                    retval = MapFragment.newInstance(UnisannioGeoData.INGEGNERIA());
+                } else {
+                    retval = new BlankFragment();
+                }
                 break;
         }
         return retval;

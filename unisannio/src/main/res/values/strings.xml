@@ -22,5 +22,6 @@
     <string name="close">Chiudi</string>
     <string name="author">Sviluppato da Ivan Morgillo</string>
     <string name="share_via">Condividi con…</string>
+    <string name="no_maps_for_you">La funzionalita` Mappa e` disponibile solo per Andoid 4 e superiori</string>
 
 </resources>
