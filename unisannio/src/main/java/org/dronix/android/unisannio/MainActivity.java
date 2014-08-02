@@ -54,6 +54,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Create the activity graph by .plus-ing our modules onto the mApplication graph.
+        mApplication = (UniApp) getApplication();
+        activityGraph = mApplication.getApplicationGraph().plus(getModules().toArray());
+
+        // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
+        activityGraph.inject(this);
+
         super.onCreate(savedInstanceState);
         Crashlytics.start(this);
 
@@ -65,13 +72,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         } else {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
-
-        // Create the activity graph by .plus-ing our modules onto the mApplication graph.
-        mApplication = (UniApp) getApplication();
-        activityGraph = mApplication.getApplicationGraph().plus(getModules().toArray());
-
-        // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
-        activityGraph.inject(this);
 
         setContentView(R.layout.activity_main);
 
