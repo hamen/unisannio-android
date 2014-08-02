@@ -116,6 +116,10 @@ public class SeaAvvisiFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     private void share(int articleIndex) {
+        if(!isAdded()) {
+            return;
+        }
+
         Article article = mNewsList.get(articleIndex);
 
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);

@@ -112,6 +112,9 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
 
     @Override
     public void onPositiveButtonClicked(int i) {
+        if(!isAdded()) {
+            return;
+        }
         share(i);
     }
 

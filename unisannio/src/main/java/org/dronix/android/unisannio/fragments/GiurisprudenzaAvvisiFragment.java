@@ -134,6 +134,10 @@ public class GiurisprudenzaAvvisiFragment extends Fragment implements SwipeRefre
 
     @Override
     public void onPositiveButtonClicked(int i) {
+        if(!isAdded()) {
+            return;
+        }
+
         share(i);
     }
 
