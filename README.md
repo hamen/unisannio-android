@@ -1,3 +1,5 @@
+The project moved here https://github.com/alter-ego/unisannio-android
+
 # University of Sannio Android App
 
 Unisannio for Android uses:
