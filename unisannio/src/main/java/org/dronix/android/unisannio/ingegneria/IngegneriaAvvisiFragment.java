@@ -1,4 +1,4 @@
-package org.dronix.android.unisannio.fragments;
+package org.dronix.android.unisannio.ingegneria;
 
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 
@@ -6,7 +6,6 @@ import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.ArticleAdapter;
 import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.retrievers.IngegneriaRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
 import android.content.Intent;
@@ -15,13 +14,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;

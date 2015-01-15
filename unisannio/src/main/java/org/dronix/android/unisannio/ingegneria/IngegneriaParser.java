@@ -1,4 +1,4 @@
-package org.dronix.android.unisannio.parsers;
+package org.dronix.android.unisannio.ingegneria;
 
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 

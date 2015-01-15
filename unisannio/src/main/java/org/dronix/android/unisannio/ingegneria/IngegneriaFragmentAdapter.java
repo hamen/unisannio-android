@@ -1,8 +1,6 @@
-package org.dronix.android.unisannio.adapters;
+package org.dronix.android.unisannio.ingegneria;
 
 import org.dronix.android.unisannio.fragments.BlankFragment;
-import org.dronix.android.unisannio.fragments.IngegneriaAvvisiFragment;
-import org.dronix.android.unisannio.fragments.IngegneriaEventiFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.settings.UnisannioGeoData;
 

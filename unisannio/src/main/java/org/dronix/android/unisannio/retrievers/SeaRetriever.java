@@ -3,17 +3,12 @@ package org.dronix.android.unisannio.retrievers;
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 
 import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.parsers.IngegneriaParser;
 import org.dronix.android.unisannio.parsers.SeaParser;
 import org.dronix.android.unisannio.settings.URLS;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +19,6 @@ import javax.inject.Singleton;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 @Singleton

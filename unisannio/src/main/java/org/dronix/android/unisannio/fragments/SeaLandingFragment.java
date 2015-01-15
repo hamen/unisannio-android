@@ -4,7 +4,6 @@ import com.viewpagerindicator.TitlePageIndicator;
 
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.adapters.IngegneriaFragmentAdapter;
 import org.dronix.android.unisannio.adapters.SEAFragmentAdapter;
 import org.dronix.android.unisannio.settings.URLS;
 

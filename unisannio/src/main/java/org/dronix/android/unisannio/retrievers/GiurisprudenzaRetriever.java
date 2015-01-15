@@ -9,11 +9,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.dronix.android.unisannio.models.Article;
 import org.dronix.android.unisannio.parsers.GiurisprudenzaParser;
-import org.dronix.android.unisannio.parsers.IngegneriaParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.parser.Parser;
-import org.jsoup.select.Elements;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -31,7 +29,6 @@ import javax.inject.Singleton;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 @Singleton

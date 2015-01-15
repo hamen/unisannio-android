@@ -2,9 +2,9 @@ package org.dronix.android.unisannio;
 
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 
-import org.dronix.android.unisannio.parsers.IngegneriaParser;
+import org.dronix.android.unisannio.ingegneria.IngegneriaParser;
 import org.dronix.android.unisannio.parsers.SeaParser;
-import org.dronix.android.unisannio.retrievers.IngegneriaRetriever;
+import org.dronix.android.unisannio.ingegneria.IngegneriaRetriever;
 import org.dronix.android.unisannio.retrievers.SeaRetriever;
 
 import android.content.Context;

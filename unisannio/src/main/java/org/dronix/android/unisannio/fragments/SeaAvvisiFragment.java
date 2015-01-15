@@ -6,7 +6,6 @@ import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.ArticleAdapter;
 import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.retrievers.IngegneriaRetriever;
 import org.dronix.android.unisannio.retrievers.SeaRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 

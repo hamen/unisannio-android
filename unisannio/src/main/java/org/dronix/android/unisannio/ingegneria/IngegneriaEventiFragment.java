@@ -1,7 +1,6 @@
-package org.dronix.android.unisannio.fragments;
+package org.dronix.android.unisannio.ingegneria;
 
 import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.retrievers.IngegneriaRetriever;
 import org.dronix.android.unisannio.settings.URLS;
 
 import android.os.Bundle;
@@ -10,8 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-
-import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
