@@ -95,5 +95,7 @@ dependencies {
     apt 'com.squareup.dagger:dagger-compiler:1.2.1'
 
     compile 'eu.inmite.android.lib:android-styled-dialogs:1.1.2@aar'
+    compile 'com.github.johnkil.android-robototextview:robototextview:2.2.0'
+
     compile 'com.crashlytics.android:crashlytics:1.+'
 }

@@ -1,11 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          android:id="@android:id/text1"
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-          android:textSize="20sp"
-          android:text="Placeholder"
-          android:gravity="center_vertical"
-          android:textColor="@color/navigation_drawer_item_text"
-          android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-          android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:roboto="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/navigation_drawer_item_selector"
+                android:minHeight="?android:attr/listPreferredItemHeight"
+                android:padding="10dp">
+
+    <ImageView
+            android:id="@+id/navigation_drawer_item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_alignParentTop="true"
+            android:paddingRight="10dp"/>
+
+    <com.devspark.robototextview.widget.RobotoTextView
+            android:id="@+id/navigation_drawer_item_text"
+            roboto:fontFamily="roboto"
+            roboto:textWeight="light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/navigation_drawer_item_icon"
+            android:paddingRight="10dp"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="20sp"/>
+
+</RelativeLayout>

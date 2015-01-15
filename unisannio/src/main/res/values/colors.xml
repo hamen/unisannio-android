@@ -6,17 +6,23 @@
     <drawable name="actionbar_background">#FDBE17</drawable>
 
     <color name="unisannio_yellow">#FDBE17</color>
+    <color name="unisannio_yellow_dark">#ffcd9217</color>
     <color name="unisannio_blue">#1761A0</color>
+
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 
     <color name="dialog_message_text">#333333</color>
     <color name="dialog_title_text">#f3a71e</color>
     <color name="dialog_title_separator">#f3a71e</color>
     <color name="dialog_button_text">#333333</color>
     <color name="dialog_button_normal">@android:color/transparent</color>
-    <color name="dialog_button_pressed">#99f3a71e</color> <!-- 60 % opacity -->
-    <color name="dialog_button_focused">#4Cf3a71e</color> <!-- 30 % opacity -->
-    <color name="dialog_button_separator">#25000000</color> <!-- 7% opacity -->
+    <color name="dialog_button_pressed">#99f3a71e</color>
+    <!-- 60 % opacity -->
+    <color name="dialog_button_focused">#4Cf3a71e</color>
+    <!-- 30 % opacity -->
+    <color name="dialog_button_separator">#25000000</color>
+    <!-- 7% opacity -->
     <color name="background">#FFA500</color>
 
     <color name="light_grey">#f0f0f0</color>

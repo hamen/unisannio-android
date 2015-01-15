@@ -5,10 +5,10 @@ import com.crashlytics.android.Crashlytics;
 
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
-import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.SeaLandingFragment;
 import org.dronix.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
+import org.dronix.android.unisannio.nagivation_drawer.NavigationDrawerFragment;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -35,15 +35,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Inject
     DetailedAndroidLogger mLogger;
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
     @Getter
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
 
     private ObjectGraph activityGraph;
@@ -54,14 +48,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Create the activity graph by .plus-ing our modules onto the mApplication graph.
         mApplication = (UniApp) getApplication();
-        activityGraph = mApplication.getApplicationGraph().plus(getModules().toArray());
 
-        // Inject ourselves so subclasses will have dependencies fulfilled when this method returns.
+        activityGraph = mApplication.getApplicationGraph().plus(getModules().toArray());
         activityGraph.inject(this);
 
         super.onCreate(savedInstanceState);
+
         Crashlytics.start(this);
 
         UniApp.setActivity(this);
@@ -75,22 +68,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         setContentView(R.layout.activity_main);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        mLogger.debug("Starting...");
     }
 
     protected List<Object> getModules() {
-        return Arrays.<Object>asList(new ActivityModule(this));
+        return Arrays.asList(new ActivityModule(this));
     }
 
-    /**
-     * Inject the supplied {@code object} using the activity-specific graph.
-     */
     public void inject(Object object) {
         if (activityGraph == null) {
             activityGraph = mApplication.getApplicationGraph().plus(getModules().toArray());
@@ -183,7 +168,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
+            //getMenuInflater().inflate(R.menu.activity_main, menu);
             restoreActionBar();
             return true;
         }
@@ -193,5 +178,29 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mNavigationDrawerFragment.isDrawerOpen()) {
+            mNavigationDrawerFragment.close();
+        } else if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack();
+            resetActionBar(true, DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public void resetActionBar(boolean childAction, int drawerMode) {
+        if (childAction) {
+            // [Undocumented?] trick to get up button icon to show
+            mNavigationDrawerFragment.getDrawerToggle().setDrawerIndicatorEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        } else {
+            mNavigationDrawerFragment.getDrawerToggle().setDrawerIndicatorEnabled(true);
+        }
+
+        mNavigationDrawerFragment.getDrawerLayout().setDrawerLockMode(drawerMode);
     }
 }

@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- the theme applied to the application or activity -->
-    <style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
 
+    <style name="AppTheme" parent="AppTheme.Base"/>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/unisannio_blue</item>
+        <item name="colorPrimary">@color/unisannio_yellow</item>
+        <item name="colorPrimaryDark">@color/unisannio_yellow_dark</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
+        <item name="actionBarStyle">@style/ActionBar</item>
         <item name="sdlDialogStyle">@style/DialogStyleLight.Custom</item>
-        <!-- Support library compatibility -->
-        <item name="actionBarStyle">@style/MyActionBar</item>
+
     </style>
 
+    <style name="DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
+        <item name="spinBars">true</item>
+        <item name="color">@android:color/white</item>
+    </style>
+
+    <style name="ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="drawerArrowStyle">@style/AppTheme.DrawerArrowToggle</item>
+    </style>
+
+    <style name="AppTheme.DrawerArrowToggle" parent="Base.Widget.AppCompat.DrawerArrowToggle">
+        <item name="color">@android:color/white</item>
+    </style>
     <!-- ActionBar styles -->
     <style name="MyActionBar"
            parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">

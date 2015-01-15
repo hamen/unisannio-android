@@ -4,14 +4,14 @@ import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
-import org.dronix.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
-import org.dronix.android.unisannio.ingegneria.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
-import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
-import org.dronix.android.unisannio.fragments.SeaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.ScienzeAvvisiFragment;
+import org.dronix.android.unisannio.fragments.SeaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.SeaLandingFragment;
+import org.dronix.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
+import org.dronix.android.unisannio.ingegneria.IngegneriaLandingFragment;
+import org.dronix.android.unisannio.nagivation_drawer.NavigationDrawerFragment;
 
 import android.content.Context;
 import android.support.v4.app.FragmentManager;
@@ -60,7 +60,8 @@ public class ActivityModule {
     }
 
     /**
-     * Allow the activity context to be injected but require that it be annotated with {@link ForActivity @ForActivity} to explicitly differentiate it
+     * Allow the activity context to be injected but require that it be annotated with {@link ForActivity @ForActivity} to explicitly differentiate
+     * it
      * from application context.
      */
     @Provides

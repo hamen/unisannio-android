@@ -5,6 +5,7 @@ import com.viewpagerindicator.TitlePageIndicator;
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.ScienzeFragmentAdapter;
+import org.dronix.android.unisannio.nagivation_drawer.NavigationDrawerFragment;
 
 import android.app.Activity;
 import android.content.Intent;

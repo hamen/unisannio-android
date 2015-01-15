@@ -6,16 +6,36 @@
         android:layout_height="match_parent"
         tools:context="org.dronix.android.unisannio.MainActivity">
 
-    <FrameLayout
-            android:id="@+id/container"
+    <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <fragment android:id="@+id/navigation_drawer"
+        <android.support.v7.widget.Toolbar
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/toolbar"
+                app:navigationIcon="@drawable/ic_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="4dp"
+                android:minHeight="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme"
+                android:background="?attr/colorPrimary"
+                app:theme="@style/AppTheme"/>
+
+        <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <fragment xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/navigation_drawer"
               android:layout_width="@dimen/navigation_drawer_width"
               android:layout_height="match_parent"
-              android:layout_gravity="left"
-              android:name="org.dronix.android.unisannio.fragments.NavigationDrawerFragment"
+              android:layout_gravity="start"
+              android:name="org.dronix.android.unisannio.nagivation_drawer.NavigationDrawerFragment"
               tools:layout="@layout/fragment_navigation_drawer"/>
-
 </android.support.v4.widget.DrawerLayout>
