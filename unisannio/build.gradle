@@ -30,7 +30,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 21
         versionCode 14
-        versionName "0.8"
+        versionName "20150115"
     }
     signingConfigs {
 
@@ -86,8 +86,8 @@ dependencies {
 
     compile 'com.jakewharton:butterknife:5.1.0'
 
-    provided "org.projectlombok:lombok:1.12.6"
-    apt "org.projectlombok:lombok:1.12.6"
+    provided "org.projectlombok:lombok:1.14.8"
+    apt "org.projectlombok:lombok:1.14.8"
 
     compile 'com.squareup.dagger:dagger:1.2.1'
     apt 'com.squareup.dagger:dagger-compiler:1.2.1'

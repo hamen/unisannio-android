@@ -1,10 +1,10 @@
-package org.dronix.android.unisannio.fragments;
+package org.dronix.android.unisannio.ingegneria;
 
 import com.viewpagerindicator.TitlePageIndicator;
 
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.ingegneria.IngegneriaFragmentAdapter;
+import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.settings.URLS;
 
 import android.app.Activity;

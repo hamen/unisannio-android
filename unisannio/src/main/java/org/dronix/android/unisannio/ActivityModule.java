@@ -5,7 +5,7 @@ import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaAvvisiFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
 import org.dronix.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
-import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
+import org.dronix.android.unisannio.ingegneria.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
 import org.dronix.android.unisannio.fragments.SeaAvvisiFragment;

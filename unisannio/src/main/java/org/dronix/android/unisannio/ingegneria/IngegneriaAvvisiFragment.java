@@ -4,9 +4,7 @@ import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.adapters.ArticleAdapter;
-import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.settings.URLS;
+import org.jsoup.select.Elements;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,7 +28,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import eu.inmite.android.lib.dialogs.ISimpleDialogListener;
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
+import rx.Observable;
 import rx.Observer;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 
 public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, ISimpleDialogListener {
 
@@ -52,9 +53,9 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
     @Inject
     IngegneriaRetriever mIngegneriaRetriever;
 
-    private List<Article> mNewsList;
+    private List<IngegneriaRssItem> mNewsList;
 
-    private ArticleAdapter mAdapter;
+    private IngegneriaRssItemAdapter mAdapter;
 
     private IngegneriaAvvisiFragment mContext;
 
@@ -70,8 +71,8 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
         mSwipeRefreshLayout.setColorScheme(R.color.unisannio_blue, R.color.unisannio_yellow, R.color.unisannio_blue, R.color.unisannio_yellow);
         mSwipeRefreshLayout.setEnabled(true);
 
-        mNewsList = new ArrayList<Article>();
-        mAdapter = new ArticleAdapter(inflater, mNewsList, new ListItemButtonClickListener());
+        mNewsList = new ArrayList<>();
+        mAdapter = new IngegneriaRssItemAdapter(inflater, mNewsList, new ListItemButtonClickListener());
         mListView.setAdapter(mAdapter);
 
         refreshList();
@@ -87,8 +88,15 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
     private void refreshList() {
         mSwipeRefreshLayout.setRefreshing(true);
 
-        mIngegneriaRetriever.getArticles(URLS.INGEGNERIA_NEWS_RSS, URLS.INGEGNERIA_NEWS_PHP)
-                .subscribe(new Observer<List<Article>>() {
+        mIngegneriaRetriever.retrieveRssRawElements()
+                .flatMap(new Func1<Elements, Observable<List<IngegneriaRssItem>>>() {
+                    @Override
+                    public Observable<List<IngegneriaRssItem>> call(Elements elements) {
+                        return mIngegneriaRetriever.getRssItems(elements);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<IngegneriaRssItem>>() {
                     @Override
                     public void onCompleted() {
 
@@ -96,11 +104,11 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
 
                     @Override
                     public void onError(Throwable e) {
-                        mLogger.error(e.getMessage());
+
                     }
 
                     @Override
-                    public void onNext(List<Article> list) {
+                    public void onNext(List<IngegneriaRssItem> list) {
                         mAdapter.setNewsList(list);
                         mSwipeRefreshLayout.setRefreshing(false);
                     }
@@ -109,14 +117,14 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
 
     @Override
     public void onPositiveButtonClicked(int i) {
-        if(!isAdded()) {
+        if (!isAdded()) {
             return;
         }
         share(i);
     }
 
     private void share(int articleIndex) {
-        Article article = mNewsList.get(articleIndex);
+        IngegneriaRssItem article = mNewsList.get(articleIndex);
 
         Intent sharingIntent = new Intent(Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
@@ -135,7 +143,7 @@ public class IngegneriaAvvisiFragment extends Fragment implements SwipeRefreshLa
         @Override
         public void onClick(View v) {
             for (int i = mListView.getFirstVisiblePosition(); i <= mListView.getLastVisiblePosition(); i++) {
-                Article article = mNewsList.get(i);
+                IngegneriaRssItem article = mNewsList.get(i);
 
                 if (v == mListView.getChildAt(i - mListView.getFirstVisiblePosition()).findViewById(R.id.list_item_card_button_1)) {
                     SimpleDialogFragment

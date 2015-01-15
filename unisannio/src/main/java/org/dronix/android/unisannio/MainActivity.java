@@ -1,14 +1,14 @@
 package org.dronix.android.unisannio;
 
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
-
 import com.crashlytics.android.Crashlytics;
+
 import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
-import org.dronix.android.unisannio.fragments.IngegneriaLandingFragment;
 import org.dronix.android.unisannio.fragments.NavigationDrawerFragment;
-import org.dronix.android.unisannio.fragments.SeaLandingFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
+import org.dronix.android.unisannio.fragments.SeaLandingFragment;
+import org.dronix.android.unisannio.ingegneria.IngegneriaAvvisiFragment;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -32,6 +32,9 @@ import lombok.experimental.Accessors;
 @Accessors(prefix = "m")
 public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    @Inject
+    DetailedAndroidLogger mLogger;
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -46,9 +49,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     private ObjectGraph activityGraph;
 
     private boolean mIsTablet;
-
-    @Inject
-    DetailedAndroidLogger mLogger;
 
     private UniApp mApplication;
 
@@ -117,7 +117,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             case 1:
                 mTitle = getString(R.string.title_section2);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, IngegneriaLandingFragment.newInstance())
+                        .replace(R.id.container, new IngegneriaAvvisiFragment())
                         .commit();
                 break;
             case 2:

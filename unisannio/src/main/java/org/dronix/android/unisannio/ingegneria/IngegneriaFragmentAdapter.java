@@ -26,7 +26,6 @@ public class IngegneriaFragmentAdapter extends FragmentPagerAdapter {
         Fragment retval = null;
         switch (position) {
             case 0:
-                retval = new IngegneriaEventiFragment();
                 break;
             case 1:
                 retval = new IngegneriaAvvisiFragment();

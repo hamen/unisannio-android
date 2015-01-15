@@ -2,18 +2,17 @@ package org.dronix.android.unisannio.ingegneria;
 
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 
-import org.dronix.android.unisannio.models.Article;
-import org.dronix.android.unisannio.ingegneria.IngegneriaParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.parser.Parser;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,8 +20,6 @@ import javax.inject.Singleton;
 
 import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func2;
 import rx.schedulers.Schedulers;
 
 @Singleton
@@ -34,101 +31,57 @@ public class IngegneriaRetriever {
     @Inject
     DetailedAndroidLogger mLogger;
 
-    public Observable<List<Article>> getArticles(final String url, final String phpUrl) {
+    public Observable<Elements> retrieveRssRawElements() {
+
         return Observable
-                .zip(getRSS(url), getPHP(phpUrl), new Func2<List<Article>, List<Article>, List<Article>>() {
+                .create(new Observable.OnSubscribe<Elements>() {
                     @Override
-                    public List<Article> call(List<Article> rssArticles, List<Article> phpArticles) {
-                        List<Article> articles = new ArrayList<>();
-                        for (Article rssArticle : rssArticles) {
-                            for (Article phpArticle : phpArticles) {
-                                if (phpArticle.getTitle().equals(rssArticle.getTitle())) {
-                                    phpArticle.setLink(rssArticle.getLink());
-                                    articles.add(phpArticle);
-                                }
-                            }
-                        }
-                        return articles;
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    private Observable<List<Article>> getRSS(final String url) {
-        return Observable
-                .create(new Observable.OnSubscribe<List<Article>>() {
-                    @Override
-                    public void call(Subscriber<? super List<Article>> subscriber) {
-                        List<Article> newsList = new ArrayList<Article>();
-                        try {
-                            String html;
-                            URL remote = new URL(url);
-                            BufferedReader reader = new BufferedReader(new InputStreamReader(remote.openStream(), "ISO-8859-1"));
-
-                            StringBuilder str = new StringBuilder();
-                            String line;
-                            while ((line = reader.readLine()) != null) {
-                                str.append(line);
-                            }
-                            reader.close();
-                            html = str.toString();
-
-                            Document doc = Jsoup.parse(html, "", Parser.xmlParser());
-
-                            newsList = mParser.parseRSS(doc);
-                            subscriber.onNext(newsList);
-                            subscriber.onCompleted();
-                        } catch (Exception e) {
-                            subscriber.onError(e);
-                        }
-                    }
-                });
-    }
-
-    private Observable<List<Article>> getPHP(final String url) {
-        return Observable
-                .create(new Observable.OnSubscribe<List<Article>>() {
-                    @Override
-                    public void call(Subscriber<? super List<Article>> subscriber) {
-                        List<Article> newsList = new ArrayList<Article>();
-
+                    public void call(Subscriber<? super Elements> subscriber) {
                         Document doc = null;
                         try {
-                            doc = Jsoup.parse(new URL(url).openStream(), "ISO-8859-1", url);
+                            doc = Jsoup.parse(new URL(IngegneriaSettings.AVVISI_URL).openStream(), "ISO-8859-1", IngegneriaSettings.AVVISI_URL);
                         } catch (IOException e) {
                             subscriber.onError(e);
                         }
-                        newsList = mParser.parsePHP(doc);
-                        subscriber.onNext(newsList);
+                        if (doc != null) {
+                            Elements items = doc.select("item");
+                            subscriber.onNext(items);
+                            subscriber.onCompleted();
+                        }
+                    }
+                })
+                .subscribeOn(Schedulers.io());
+    }
+
+    public Observable<List<IngegneriaRssItem>> getRssItems(final Elements elements) {
+        final List<IngegneriaRssItem> items = new ArrayList<>();
+        return Observable
+                .create(new Observable.OnSubscribe<List<IngegneriaRssItem>>() {
+                    @Override
+                    public void call(Subscriber<? super List<IngegneriaRssItem>> subscriber) {
+                        for (Element element : elements) {
+                            String pattern = "EEE, dd MMM yyyy HH:mm:ss Z";
+                            SimpleDateFormat format = new SimpleDateFormat(pattern);
+                            Date pubDate = null;
+                            try {
+                                pubDate = format.parse(element.select("pubDate").text());
+                            } catch (ParseException e) {
+                                subscriber.onError(e);
+                            }
+
+                            IngegneriaRssItem item = new IngegneriaRssItem(
+                                    element.select("title").text(),
+                                    element.select("link").text(),
+                                    element.select("description").text(),
+                                    pubDate,
+                                    element.select("source").text());
+
+                            items.add(item);
+                        }
+
+                        subscriber.onNext(items);
                         subscriber.onCompleted();
                     }
                 });
-    }
-
-    public Observable<String> getEventi(final String url) {
-        return Observable
-                .create(new Observable.OnSubscribe<String>() {
-                    @Override
-                    public void call(Subscriber<? super String> subscriber) {
-                        Document doc = null;
-                        Elements div = null;
-                        try {
-                            doc = Jsoup.connect(url).timeout(20 * 1000).get();
-                        } catch (IOException e) {
-                            subscriber.onError(e);
-                        }
-
-                        if (doc != null) {
-                            div = doc.select("#contenuto");
-                            if (div.first() != null) {
-                                subscriber.onNext(div.first().html());
-                                subscriber.onCompleted();
-                            }
-                        }
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
     }
 }

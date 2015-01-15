@@ -1,7 +1,6 @@
-package org.dronix.android.unisannio.adapters;
+package org.dronix.android.unisannio.ingegneria;
 
 import org.dronix.android.unisannio.R;
-import org.dronix.android.unisannio.models.Article;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +15,15 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-public class ArticleAdapter extends BaseAdapter {
+public class IngegneriaRssItemAdapter extends BaseAdapter {
 
     private final LayoutInflater mInflater;
 
     private final OnClickListener mItemButtonClickListener;
 
-    private List<Article> mNewsList;
+    private List<IngegneriaRssItem> mNewsList;
 
-    public ArticleAdapter(LayoutInflater inflater, List<Article> list, OnClickListener itemButtonClickListener) {
+    public IngegneriaRssItemAdapter(LayoutInflater inflater, List<IngegneriaRssItem> list, OnClickListener itemButtonClickListener) {
         mNewsList = list;
         mInflater = inflater;
         mItemButtonClickListener = itemButtonClickListener;
@@ -34,7 +33,7 @@ public class ArticleAdapter extends BaseAdapter {
         return mNewsList.size();
     }
 
-    public Article getItem(int position) {
+    public IngegneriaRssItem getItem(int position) {
         return mNewsList.get(position);
     }
 
@@ -57,10 +56,10 @@ public class ArticleAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Article article = getItem(position);
+        IngegneriaRssItem article = getItem(position);
 
         holder.title.setText(article.getTitle());
-        holder.date.setText(article.getPubDate());
+        holder.date.setText(article.getPubDate().toString());
 
         if (mItemButtonClickListener != null) {
             holder.itemButton1.setOnClickListener(mItemButtonClickListener);
@@ -71,7 +70,7 @@ public class ArticleAdapter extends BaseAdapter {
     }
 
 
-    public void setNewsList(List<Article> newsList) {
+    public void setNewsList(List<IngegneriaRssItem> newsList) {
         mNewsList.clear();
         mNewsList.addAll(newsList);
         notifyDataSetChanged();
