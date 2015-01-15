@@ -16,7 +16,6 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,16 +45,20 @@ public class MapFragment extends Fragment {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) UniApp.getActivity().getSupportFragmentManager().findFragmentById(R.id.location_map)).getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap(markers);
+            SupportMapFragment mapFragment = (SupportMapFragment) UniApp.getActivity().getSupportFragmentManager()
+                    .findFragmentById(R.id.location_map);
+            if (mapFragment != null) {
+                mMap = mapFragment.getMap();
+                // Check if we were successful in obtaining the map.
+                if (mMap != null) {
+                    setUpMap(markers);
+                }
             }
         }
     }
 
     private static void setUpMap(List<UniPoint> markers) {
-        // For showing a move to my loction button
+        // For showing a move to my location button
         mMap.setMyLocationEnabled(true);
 
         for (UniPoint uniPoint : markers) {
@@ -102,10 +105,14 @@ public class MapFragment extends Fragment {
 
         if (mMap == null) {
             // Try to obtain the map from the SupportMapFragment.
-            mMap = ((SupportMapFragment) UniApp.getActivity().getSupportFragmentManager().findFragmentById(R.id.location_map)).getMap();
-            // Check if we were successful in obtaining the map.
-            if (mMap != null) {
-                setUpMap(mMarkers);
+            SupportMapFragment mapFragment = (SupportMapFragment) UniApp.getActivity().getSupportFragmentManager()
+                    .findFragmentById(R.id.location_map);
+            if (mapFragment != null) {
+                mMap = mapFragment.getMap();
+                // Check if we were successful in obtaining the map.
+                if (mMap != null) {
+                    setUpMap(mMarkers);
+                }
             }
         }
     }
