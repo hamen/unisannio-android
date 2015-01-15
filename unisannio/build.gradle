@@ -4,7 +4,7 @@ buildscript {
         maven { url 'http://download.crashlytics.com/maven' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.12.2'
+        classpath 'com.android.tools.build:gradle:1.0.0'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.2'
         classpath 'com.crashlytics.tools.gradle:crashlytics-gradle:1.+'
     }
@@ -18,16 +18,17 @@ repositories {
     maven { url "http://dl.bintray.com/populov/maven" }
     mavenCentral()
     maven { url 'http://download.crashlytics.com/maven' }
+    maven { url "https://github.com/alter-ego/advanced-android-logger/raw/develop/releases/" }
 }
 
 android {
-    compileSdkVersion 20
-    buildToolsVersion "20"
+    compileSdkVersion 21
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "org.dronix.android.unisannio"
         minSdkVersion 10
-        targetSdkVersion 20
+        targetSdkVersion 21
         versionCode 14
         versionName "0.8"
     }
@@ -69,10 +70,10 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile project(':libraries:advanced-android-logger:app')
+    compile 'com.alterego:advancedandroidlogger:1.0.3@aar'
 
-    compile 'com.android.support:support-v4:19.1.0'
-    compile 'com.android.support:appcompat-v7:19.1.0'
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.google.android.gms:play-services:+'
 
     compile 'org.jsoup:jsoup:1.7.3'
