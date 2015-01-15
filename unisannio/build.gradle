@@ -29,7 +29,7 @@ android {
 
     defaultConfig {
         applicationId "org.dronix.android.unisannio"
-        minSdkVersion 10
+        minSdkVersion 16
         targetSdkVersion 21
         versionCode 14
         versionName "20150115"
