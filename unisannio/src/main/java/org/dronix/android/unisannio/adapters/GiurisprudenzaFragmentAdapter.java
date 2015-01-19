@@ -2,11 +2,8 @@ package org.dronix.android.unisannio.adapters;
 
 import com.google.android.gms.maps.GoogleMap;
 
-import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaAvvisiFragment;
-import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.settings.URLS;
-import org.dronix.android.unisannio.settings.UnisannioGeoData;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

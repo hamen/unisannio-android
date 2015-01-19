@@ -2,7 +2,14 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/action_website"
-          android:title="Sito WEB"
+          android:icon="@drawable/ic_action_globe"
           android:orderInCategory="100"
-          app:showAsAction="ifRoom"/>
+          app:showAsAction="ifRoom"
+          android:title=""/>
+
+    <item android:id="@+id/action_map"
+          android:icon="@drawable/ic_action_location"
+          android:orderInCategory="100"
+          app:showAsAction="ifRoom"
+          android:title=""/>
 </menu>

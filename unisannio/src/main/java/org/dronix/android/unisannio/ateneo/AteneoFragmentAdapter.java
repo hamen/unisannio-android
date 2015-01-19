@@ -1,8 +1,5 @@
-package org.dronix.android.unisannio.adapters;
+package org.dronix.android.unisannio.ateneo;
 
-import com.google.android.gms.maps.GoogleMap;
-
-import org.dronix.android.unisannio.fragments.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.BlankFragment;
 import org.dronix.android.unisannio.fragments.MapFragment;
 import org.dronix.android.unisannio.settings.UnisannioGeoData;

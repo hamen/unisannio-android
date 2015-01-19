@@ -1,27 +1,32 @@
-package org.dronix.android.unisannio.fragments;
+package org.dronix.android.unisannio.ateneo;
 
 import org.dronix.android.unisannio.MainActivity;
 import org.dronix.android.unisannio.R;
 import org.dronix.android.unisannio.adapters.NewsAdapter;
-import org.dronix.android.unisannio.models.Article;
+import org.dronix.android.unisannio.fragments.WebviewFragment;
 import org.dronix.android.unisannio.models.News;
-import org.dronix.android.unisannio.retrievers.AteneoRetriever;
+import org.dronix.android.unisannio.nagivation_drawer.NavigationDrawerFragment;
 import org.dronix.android.unisannio.settings.URLS;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +42,17 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
     @Inject
     FragmentManager mFragmentManager;
 
+    @Inject
+    NavigationDrawerFragment mNavigationDrawerFragment;
+
     @InjectView(R.id.listView)
     GridView mListView;
 
     @InjectView(R.id.ptr_layout)
     SwipeRefreshLayout mSwipeRefreshLayout;
+
+    @InjectView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private List<News> mNewsList;
 
@@ -52,11 +63,18 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
         final ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_avvisi, container, false);
         ButterKnife.inject(this, rootView);
 
+        ActionBarActivity activity = (ActionBarActivity) getActivity();
+        activity.setSupportActionBar(mToolbar);
+        ActionBar actionBar = activity.getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setTitle(getString(R.string.app_name));
+
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorScheme(R.color.unisannio_blue, R.color.unisannio_yellow, R.color.unisannio_blue, R.color.unisannio_yellow);
         mSwipeRefreshLayout.setEnabled(true);
 
-        mNewsList = new ArrayList<News>();
+        mNewsList = new ArrayList<>();
         mAdapter = new NewsAdapter(inflater, mNewsList, new ListItemButtonClickListener());
         mListView.setAdapter(mAdapter);
 
@@ -99,6 +117,37 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
                 });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_website) {
+            Uri uri = Uri.parse(URLS.ATENEO);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).resetActionBar(false, DrawerLayout.STATE_IDLE);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((MainActivity) activity).onSectionAttached(1);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if (mNavigationDrawerFragment != null && !mNavigationDrawerFragment.isDrawerOpen()) {
+            inflater.inflate(R.menu.ateneo, menu);
+        }
+    }
+
     private final class ListItemButtonClickListener implements View.OnClickListener {
 
         @Override
@@ -120,14 +169,6 @@ public class AteneoAvvisiFragment extends Fragment implements SwipeRefreshLayout
                     startActivity(Intent.createChooser(sharingIntent, "Share via"));
                 }
             }
-        }
-    }
-
-    private final class ListItemClickListener implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Toast.makeText(getActivity(), "Clicked on List Item " + position, Toast.LENGTH_SHORT).show();
         }
     }
 }

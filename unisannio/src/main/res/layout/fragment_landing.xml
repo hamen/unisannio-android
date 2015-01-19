@@ -6,6 +6,8 @@
               android:orientation="vertical"
               tools:context=".fragments.Ateneo">
 
+
+
     <com.viewpagerindicator.TitlePageIndicator
             android:background="#ffffff"
             android:textColor="#AA000000"

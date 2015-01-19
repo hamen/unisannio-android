@@ -3,7 +3,7 @@ package org.dronix.android.unisannio;
 import com.alterego.advancedandroidlogger.implementations.DetailedAndroidLogger;
 import com.crashlytics.android.Crashlytics;
 
-import org.dronix.android.unisannio.fragments.AteneoLandingFragment;
+import org.dronix.android.unisannio.ateneo.AteneoAvvisiFragment;
 import org.dronix.android.unisannio.fragments.GiurisprudenzaLandingFragment;
 import org.dronix.android.unisannio.fragments.ScienceLandingFragment;
 import org.dronix.android.unisannio.fragments.SeaLandingFragment;
@@ -96,7 +96,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             case 0:
                 mTitle = getString(R.string.title_section1);
                 fragmentManager.beginTransaction()
-                        .replace(R.id.container, AteneoLandingFragment.newInstance())
+                        .replace(R.id.container, new AteneoAvvisiFragment())
                         .commit();
                 break;
             case 1:

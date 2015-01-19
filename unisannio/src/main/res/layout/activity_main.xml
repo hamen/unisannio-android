@@ -11,18 +11,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/toolbar"
-                app:navigationIcon="@drawable/ic_drawer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="4dp"
-                android:minHeight="?attr/actionBarSize"
-                app:popupTheme="@style/AppTheme"
-                android:background="?attr/colorPrimary"
-                app:theme="@style/AppTheme"/>
-
         <FrameLayout
                 android:id="@+id/container"
                 android:layout_width="match_parent"

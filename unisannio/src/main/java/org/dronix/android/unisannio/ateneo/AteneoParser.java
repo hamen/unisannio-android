@@ -1,4 +1,4 @@
-package org.dronix.android.unisannio.parsers;
+package org.dronix.android.unisannio.ateneo;
 
 import org.dronix.android.unisannio.models.News;
 import org.jsoup.nodes.Document;

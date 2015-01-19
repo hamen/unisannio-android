@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbar"
+            app:navigationIcon="@drawable/ic_drawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/AppTheme"
+            android:background="?attr/colorPrimary"
+            app:theme="@style/AppTheme"/>
 
     <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/ptr_layout"
             android:background="@color/unisannio_blue"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -18,7 +29,7 @@
                 android:id="@+id/listView"
 
                 android:clipToPadding="false"
-                
+
                 android:numColumns="@integer/avvisi_columns"
 
                 android:horizontalSpacing="@dimen/avvisi_gridview_divider"
@@ -30,4 +41,4 @@
 
                 android:background="@color/unisannio_blue"/>
     </android.support.v4.widget.SwipeRefreshLayout>
-</RelativeLayout>
+</LinearLayout>
