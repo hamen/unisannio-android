@@ -3,7 +3,7 @@
 
     <style name="AppTheme" parent="AppTheme.Base"/>
 
-    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:textColorPrimary">@color/unisannio_blue</item>
         <item name="colorPrimary">@color/unisannio_yellow</item>
         <item name="colorPrimaryDark">@color/unisannio_yellow_dark</item>
